@@ -2,63 +2,10 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
 
-            <li class="d-none d-lg-block">
-                <form class="app-search">
-                    <div class="app-search-box dropdown">
-                        <div class="input-group">
-                            <input type="search" class="form-control" placeholder="Buscar..." id="top-search">
-                            <button class="btn input-group-text" type="submit">
-                                <i class="fe-search"></i>
-                            </button>
-
-                        </div>
-                </form>
-            </li>
-
-            <li class="dropdown d-inline-block d-lg-none">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <i class="fe-search noti-icon"></i>
-                </a>
-                <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-                    <form class="p-3">
-                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Recipient's username">
-                    </form>
-                </div>
-            </li>
-
             <li class="dropdown d-none d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
                     <i class="fe-maximize noti-icon"></i>
                 </a>
-            </li>
-
-            <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <i class="fe-bell noti-icon"></i>
-                    <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-lg">
-
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
-                            <span class="float-end">
-                                <a href="" class="text-dark">
-                                    <small>Clear All</small>
-                                </a>
-                            </span>Notification
-                        </h5>
-                    </div>
-
-                    <div class="noti-scroll" data-simplebar>
-
-                        <!-- All-->
-                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                            Ver todo
-                            <i class="fe-arrow-right"></i>
-                        </a>
-
-                    </div>
             </li>
 
             @php
@@ -86,12 +33,6 @@
                     </a>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-settings"></i>
-                        <span>Configuraciones</span>
-                    </a>
-
-                    <!-- item-->
                     <a href="{{ route('change.password') }}" class="dropdown-item notify-item">
                         <i class="fe-lock"></i>
                         <span>Cambiar contraseña</span>
@@ -107,12 +48,6 @@
                     </a>
 
                 </div>
-            </li>
-
-            <li class="dropdown notification-list">
-                <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect waves-light">
-                    <i class="fe-settings noti-icon"></i>
-                </a>
             </li>
 
         </ul>

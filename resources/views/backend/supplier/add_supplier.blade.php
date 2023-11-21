@@ -41,8 +41,8 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Nombre</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
+                                            <label for="firstname" class="form-label">Nombre*</label>
+                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" :value="old('firstname')">
                                             @error('name')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -51,8 +51,8 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror">
+                                            <label for="firstname" class="form-label">Email*</label>
+                                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" :value="old('email')">
                                             @error('email')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -61,8 +61,8 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Telefono</label>
-                                            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror">
+                                            <label for="firstname" class="form-label">Teléfono*</label>
+                                            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" :value="old('phone')">
                                             @error('phone')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -71,8 +71,8 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Dirección</label>
-                                            <input type="text" name="address" class="form-control @error('address') is-invalid @enderror">
+                                            <label for="firstname" class="form-label">Dirección*</label>
+                                            <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" :value="old('address')">
                                             @error('address')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -81,8 +81,8 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Tienda del proveedor</label>
-                                            <input type="text" name="shopname" class="form-control @error('shopname') is-invalid @enderror">
+                                            <label for="firstname" class="form-label">Tienda del proveedor*</label>
+                                            <input type="text" name="shopname" class="form-control @error('shopname') is-invalid @enderror" :value="old('shopname')">
                                             @error('shopname')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -91,7 +91,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Tipo de proveedor</label>
+                                            <label for="firstname" class="form-label">Tipo de proveedor*</label>
                                             <select name="type" class="form-select @error('type') is-invalid @enderror" id="example-select">
                                                 <option selected disabled>Selecciona el tipo</option>
                                                 <option value="Distribuidor">Distribuidor</option>
@@ -106,8 +106,8 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Titular de cuenta</label>
-                                            <input type="text" name="account_holder" class="form-control @error('account_holder') is-invalid @enderror">
+                                            <label for="firstname" class="form-label">Titular de cuenta*</label>
+                                            <input type="text" name="account_holder" class="form-control @error('account_holder') is-invalid @enderror" :value="old('account_holder')">
                                             @error('account_holder')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -116,8 +116,8 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Numero de cuenta</label>
-                                            <input type="text" name="account_number" class="form-control @error('account_number') is-invalid @enderror">
+                                            <label for="firstname" class="form-label">Número de cuenta*</label>
+                                            <input type="text" name="account_number" class="form-control @error('account_number') is-invalid @enderror" :value="old('account_number')">
                                             @error('account_number')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -127,7 +127,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="firstname" class="form-label">Banco</label>
-                                            <input type="text" name="bank_name" class="form-control @error('bank_name') is-invalid @enderror">
+                                            <input type="text" name="bank_name" class="form-control @error('bank_name') is-invalid @enderror" :value="old('bank_name')">
                                             @error('bank_name')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -137,7 +137,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="firstname" class="form-label">Banco opcional</label>
-                                            <input type="text" name="bank_branch" class="form-control @error('bank_branch') is-invalid @enderror">
+                                            <input type="text" name="bank_branch" class="form-control @error('bank_branch') is-invalid @enderror" :value="old('bank_branch')">
                                             @error('bank_branch')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -146,8 +146,8 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Ciudad</label>
-                                            <input type="text" name="city" class="form-control @error('city') is-invalid @enderror">
+                                            <label for="firstname" class="form-label">Ciudad*</label>
+                                            <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" :value="old('city')">
                                             @error('city')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -156,8 +156,8 @@
 
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="example-fileinput" class="form-label">Imagen</label>
-                                            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                                            <label for="example-fileinput" class="form-label">Imagen*</label>
+                                            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" :value="old('image')">
                                             @error('image')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -172,8 +172,6 @@
                                     </div> <!-- end col -->
 
                                 </div> <!-- end row -->
-
-
 
                                 <div class="text-end">
                                     <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Guardar</button>

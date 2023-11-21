@@ -41,7 +41,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Nombre</label>
+                                            <label for="firstname" class="form-label">Nombre*</label>
                                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
                                             @error('name')
                                             <span class="text-danger"> {{ $message }} </span>
@@ -51,7 +51,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Email</label>
+                                            <label for="firstname" class="form-label">Email*</label>
                                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror">
                                             @error('email')
                                             <span class="text-danger"> {{ $message }} </span>
@@ -61,7 +61,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Telefono</label>
+                                            <label for="firstname" class="form-label">Teléfono*</label>
                                             <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror">
                                             @error('phone')
                                             <span class="text-danger"> {{ $message }} </span>
@@ -71,7 +71,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Direccion</label>
+                                            <label for="firstname" class="form-label">Dirección*</label>
                                             <input type="text" name="address" class="form-control @error('address') is-invalid @enderror">
                                             @error('address')
                                             <span class="text-danger"> {{ $message }} </span>
@@ -81,7 +81,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Tienda</label>
+                                            <label for="firstname" class="form-label">Tienda*</label>
                                             <input type="text" name="shopname" class="form-control @error('shopname') is-invalid @enderror">
                                             @error('shopname')
                                             <span class="text-danger"> {{ $message }} </span>
@@ -91,7 +91,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Nombre de cuenta</label>
+                                            <label for="firstname" class="form-label">Nombre de cuenta*</label>
                                             <input type="text" name="account_holder" class="form-control @error('account_holder') is-invalid @enderror">
                                             @error('account_holder')
                                             <span class="text-danger"> {{ $message }} </span>
@@ -101,7 +101,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="firstname" class="form-label">Numero de cuenta</label>
+                                            <label for="firstname" class="form-label">Número de cuenta*</label>
                                             <input type="text" name="account_number" class="form-control @error('account_number') is-invalid @enderror">
                                             @error('account_number')
                                             <span class="text-danger"> {{ $message }} </span>
@@ -141,7 +141,7 @@
 
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="example-fileinput" class="form-label">Imagen</label>
+                                            <label for="example-fileinput" class="form-label">Imagen*</label>
                                             <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
                                             @error('image')
                                             <span class="text-danger"> {{ $message }} </span>
