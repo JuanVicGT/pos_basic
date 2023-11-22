@@ -161,7 +161,7 @@ Route::middleware(['auth'])->group(function () {
 
     /// Purchase orders / Compras de productos
     Route::controller(PurchaseOrderController::class)->group(function () {
-        Route::get('/purchase/pos', 'Pos')->name('pos')->name('.purchase');
+        Route::get('/purchase/pos', 'Pos')->name('pos.purchase');
         Route::get('/purchase/allitem', 'AllItem')->name('.purchase');
         Route::post('/purchase/add-cart', 'AddCart')->name('.purchase');
         Route::post('/purchase/create-invoice', 'CreateInvoice')->name('.purchase');
