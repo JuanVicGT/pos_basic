@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ExpenseController;
 use App\Http\Controllers\Backend\PosController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\PurchaseOrderController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -158,14 +159,28 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/create-invoice', 'CreateInvoice');
     });
 
-    ///Ordenes Rutas 
-    Route::controller(OrderController::class)->group(function(){
-        Route::post('/final-invoice','FinalInvoice');
-        Route::get('/pending/order','PendingOrder')->name('pending.order');
-        Route::get('/order/details/{order_id}','OrderDetails')->name('order.details');
-        Route::post('/order/status/update','OrderStatusUpdate')->name('order.status.update');
-        Route::get('/complete/order','CompleteOrder')->name('complete.order');
-        Route::get('/stock','StockManage')->name('stock.manage');
-       });
+    /// Purchase orders / Compras de productos
+    Route::controller(PurchaseOrderController::class)->group(function () {
+        Route::get('/purchase/pos', 'Pos')->name('pos')->name('.purchase');
+        Route::get('/purchase/allitem', 'AllItem')->name('.purchase');
+        Route::post('/purchase/add-cart', 'AddCart')->name('.purchase');
+        Route::post('/purchase/create-invoice', 'CreateInvoice')->name('.purchase');
+        Route::get('/purchase/cart-remove/{rowId}', 'CartRemove')->name('.purchase');
+        Route::post('/purchase/cart-update/{rowId}', 'CartUpdate')->name('.purchase');
 
+        Route::get('/purchase/pending', 'PendingOrder')->name('pending.purchase');
+        Route::get('/purchase/details/{order_id}', 'OrderDetails')->name('order.purchase');
+        Route::post('/purchase/status/update', 'OrderStatusUpdate')->name('order.status.purchase');
+        Route::get('/purchase/complete', 'CompleteOrder')->name('complete.purchase');
+    });
+
+    ///Ordenes Rutas 
+    Route::controller(OrderController::class)->group(function () {
+        Route::post('/final-invoice', 'FinalInvoice');
+        Route::get('/pending/order', 'PendingOrder')->name('pending.order');
+        Route::get('/order/details/{order_id}', 'OrderDetails')->name('order.details');
+        Route::post('/order/status/update', 'OrderStatusUpdate')->name('order.status.update');
+        Route::get('/complete/order', 'CompleteOrder')->name('complete.order');
+        Route::get('/stock', 'StockManage')->name('stock.manage');
+    });
 }); // End User Middleware 

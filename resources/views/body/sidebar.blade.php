@@ -1,7 +1,7 @@
 <div class="left-side-menu">
     <div class="h-100" data-simplebar>
 
-        <!-- User box 
+        <!-- User box
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <ul id="side-menu">
@@ -183,10 +183,32 @@
                     </div>
                 </li>
 
+                <!-- Purchase orders -->
+                <li>
+                    <a href="#purchases" data-bs-toggle="collapse">
+                        <i class="mdi mdi-file-document"></i>
+                        <span> Compras </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="purchases">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('pending.purchases') }}">Compras pendientes </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('complete.purchases') }}">Compras completas </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Sale orders -->
                 <li>
                     <a href="#orders" data-bs-toggle="collapse">
                         <i class="mdi mdi-file-document"></i>
-                        <span> Ordenes de compra </span>
+                        <span> Ventas </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="orders">
@@ -202,7 +224,6 @@
                         </ul>
                     </div>
                 </li>
-
 
                 <li>
                     <a href="#stock" data-bs-toggle="collapse">
