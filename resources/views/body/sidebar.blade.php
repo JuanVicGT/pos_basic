@@ -193,11 +193,11 @@
                     <div class="collapse" id="purchases">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('pending.purchases') }}">Compras pendientes </a>
+                                <a href="{{ route('purchase.pending') }}">Compras pendientes </a>
                             </li>
 
                             <li>
-                                <a href="{{ route('complete.purchases') }}">Compras completas </a>
+                                <a href="{{ route('purchase.complete') }}">Compras completas </a>
                             </li>
 
                         </ul>

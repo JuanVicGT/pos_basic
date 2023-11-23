@@ -20,7 +20,7 @@ class PurchasePosController extends Controller
     public function AddCart(Request $request)
     {
         // Por motivos de la librería se usa "price" para alojar el costo del producto
-        Cart::add([
+        Cart::instance('purchase')->add([
             'id' => $request->id,
             'name' => $request->name,
             'qty' => $request->qty,
@@ -35,14 +35,14 @@ class PurchasePosController extends Controller
 
     public function AllItem()
     {
-        $product_item = Cart::content();
+        $product_item = Cart::instance('purchase')->content();
         return view('backend.purchase.pos_item', compact('product_item'));
     } // End Method 
 
     public function CartUpdate(Request $request, $rowId)
     {
         $qty = $request->qty;
-        Cart::update($rowId, $qty);
+        Cart::instance('purchase')->update($rowId, $qty);
 
         $notification = array(
             'message' => 'Cart Updated Successfully',
@@ -54,7 +54,7 @@ class PurchasePosController extends Controller
 
     public function CartRemove($rowId)
     {
-        Cart::remove($rowId);
+        Cart::instance('purchase')->remove($rowId);
         $notification = array(
             'message' => 'Cart Remove Successfully',
             'alert-type' => 'success'
@@ -65,7 +65,7 @@ class PurchasePosController extends Controller
 
     public function CreateInvoice(Request $request)
     {
-        $items = Cart::content();
+        $items = Cart::instance('purchase')->content();
         $supplier_id = $request->supplier_id;
         $supplier = Supplier::where('id', $supplier_id)->first();
         return view('backend.purchase.product_invoice', compact('items', 'supplier'));

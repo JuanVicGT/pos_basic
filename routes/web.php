@@ -16,7 +16,8 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ExpenseController;
 use App\Http\Controllers\Backend\PosController;
 use App\Http\Controllers\Backend\OrderController;
-use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\Backend\PurchasePosController;
+use App\Http\Controllers\Backend\PurchaseOrderController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -159,19 +160,23 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/create-invoice', 'CreateInvoice');
     });
 
+    /// Purchase POS / POS de compras
+    Route::controller(PurchasePosController::class)->group(function () {
+        Route::get('/purchase/pos', 'Pos')->name('purchase.pos');
+        Route::get('/purchase/allitem', 'AllItem')->name('purchase.all');
+        Route::post('/purchase/add-cart', 'AddCart')->name('purchase.add.cart');
+        Route::get('/purchase/cart-remove/{rowId}', 'CartRemove')->name('purchase.cart.remove');
+        Route::post('/purchase/cart-update/{rowId}', 'CartUpdate')->name('purchase.cart.update');
+        Route::post('/purchase/create-invoice', 'CreateInvoice')->name('purchase.create.invoice');
+    });
+
     /// Purchase orders / Compras de productos
     Route::controller(PurchaseOrderController::class)->group(function () {
-        Route::get('/purchase/pos', 'Pos')->name('pos.purchase');
-        Route::get('/purchase/allitem', 'AllItem')->name('.purchase');
-        Route::post('/purchase/add-cart', 'AddCart')->name('.purchase');
-        Route::post('/purchase/create-invoice', 'CreateInvoice')->name('.purchase');
-        Route::get('/purchase/cart-remove/{rowId}', 'CartRemove')->name('.purchase');
-        Route::post('/purchase/cart-update/{rowId}', 'CartUpdate')->name('.purchase');
 
-        Route::get('/purchase/pending', 'PendingOrder')->name('pending.purchase');
-        Route::get('/purchase/details/{order_id}', 'OrderDetails')->name('order.purchase');
-        Route::post('/purchase/status/update', 'OrderStatusUpdate')->name('order.status.purchase');
-        Route::get('/purchase/complete', 'CompleteOrder')->name('complete.purchase');
+        Route::get('/purchase/pending', 'ViewPendingOrder')->name('purchase.pending');
+        Route::get('/purchase/complete', 'ViewCompleteOrder')->name('purchase.complete');
+        Route::get('/purchase/details/{order_id}', 'ViewOrderDetails')->name('purchase.order');
+        Route::post('/purchase/status/update', 'OrderStatusUpdate')->name('purchase.order.status');
     });
 
     ///Ordenes Rutas 
