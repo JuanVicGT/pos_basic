@@ -172,7 +172,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Purchase orders / Compras de productos
     Route::controller(PurchaseOrderController::class)->group(function () {
-
         Route::get('/purchase/pending', 'ViewPendingOrder')->name('purchase.pending');
         Route::get('/purchase/complete', 'ViewCompleteOrder')->name('purchase.complete');
         Route::get('/purchase/details/{order_id}', 'ViewOrderDetails')->name('purchase.order');

@@ -13,8 +13,8 @@ class PurchasePosController extends Controller
     public function Pos()
     {
         $product = Product::latest()->get();
-        $supplier = Supplier::latest()->get();
-        return view('backend.purchase.pos', compact('product', 'customer'));
+        $suppliers = Supplier::latest()->get();
+        return view('backend.purchase.pos', compact('product', 'suppliers'));
     } // End Method 
 
     public function AddCart(Request $request)
@@ -25,6 +25,8 @@ class PurchasePosController extends Controller
             'name' => $request->name,
             'qty' => $request->qty,
             'price' => $request->cost,
+            'weight' => 20,
+            'options' => ['size' => 'large']
         ]);
         $notification = array(
             'message' => 'Product Added Successfully',

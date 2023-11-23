@@ -193,6 +193,10 @@
                     <div class="collapse" id="purchases">
                         <ul class="nav-second-level">
                             <li>
+                                <a href="{{ route('purchase.pos') }}">Nueva Compra</a>
+                            </li>
+
+                            <li>
                                 <a href="{{ route('purchase.pending') }}">Compras pendientes </a>
                             </li>
 
