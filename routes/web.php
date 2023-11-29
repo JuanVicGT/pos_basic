@@ -163,18 +163,16 @@ Route::middleware(['auth'])->group(function () {
     /// Purchase POS / POS de compras
     Route::controller(PurchasePosController::class)->group(function () {
         Route::get('/purchase/pos', 'Pos')->name('purchase.pos');
-        Route::get('/purchase/allitem', 'AllItem')->name('purchase.all');
         Route::post('/purchase/add-cart', 'AddCart')->name('purchase.add.cart');
         Route::get('/purchase/cart-remove/{rowId}', 'CartRemove')->name('purchase.cart.remove');
         Route::post('/purchase/cart-update/{rowId}', 'CartUpdate')->name('purchase.cart.update');
-        Route::post('/purchase/create-invoice', 'CreateInvoice')->name('purchase.create.invoice');
     });
 
     /// Purchase orders / Compras de productos
     Route::controller(PurchaseOrderController::class)->group(function () {
-        Route::get('/purchase/pending', 'ViewPendingOrder')->name('purchase.pending');
-        Route::get('/purchase/complete', 'ViewCompleteOrder')->name('purchase.complete');
+        Route::get('/purchase/pending', 'ViewOrder')->name('all.purchase.order');
         Route::get('/purchase/details/{order_id}', 'ViewOrderDetails')->name('purchase.order');
+        Route::post('/purchase/create-invoice', 'FinalInvoice')->name('purchase.create.invoice');
         Route::post('/purchase/status/update', 'OrderStatusUpdate')->name('purchase.order.status');
     });
 

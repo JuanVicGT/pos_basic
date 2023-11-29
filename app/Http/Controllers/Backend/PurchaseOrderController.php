@@ -15,16 +15,10 @@ use App\Http\Controllers\Controller;
 
 class PurchaseOrderController extends Controller
 {
-    public function ViewPendingOrder()
+    public function ViewOrder()
     {
-        $orders = PurchaseOrder::where('order_status', 'pending')->get();
-        return view('backend.purchase.pending_order', compact('orders'));
-    } // End Method
-
-    public function ViewCompleteOrder()
-    {
-        $orders = PurchaseOrder::where('order_status', 'complete')->get();
-        return view('backend.purchase.complete_order', compact('orders'));
+        $orders = PurchaseOrder::latest()->get();
+        return view('backend.purchase.all_order', compact('orders'));
     } // End Method
 
     public function ViewOrderDetails($order_id)
@@ -38,18 +32,13 @@ class PurchaseOrderController extends Controller
     public function FinalInvoice(Request $request)
     {
         $data = array();
-        $data['supplier_id'] = $request->customer_id;
-        $data['order_date'] = $request->order_date;
-        $data['order_status'] = $request->order_status;
-        $data['total_products'] = $request->total_products;
-        $data['sub_total'] = $request->sub_total;
-        $data['vat'] = $request->vat;
-
+        $data['supplier_id'] = $request->supplier_id;
         $data['invoice_no'] = 'PPOS' . mt_rand(10000000, 99999999);
-        $data['total'] = $request->total;
-        $data['payment_status'] = $request->payment_status;
-        $data['pay'] = $request->pay;
-        $data['due'] = $request->due;
+        $data['total_products'] = count(Cart::instance('purchase')->content());
+        $data['total'] = Cart::instance('purchase')->total();
+        $data['order_status'] = 'SU SAPO';
+
+        $data['order_date'] = Carbon::now();
         $data['created_at'] = Carbon::now();
 
         $order_id = PurchaseOrder::insertGetId($data);
@@ -58,22 +47,31 @@ class PurchaseOrderController extends Controller
         $pdata = array();
         foreach ($items as $item) {
             $pdata['order_id'] = $order_id;
-            $pdata['product_id'] = $item->id;
-            $pdata['quantity'] = $item->qty;
-            $pdata['unitcost'] = $item->price;
             $pdata['total'] = $item->total;
+            $pdata['quantity'] = $item->qty;
+            $pdata['product_id'] = $item->id;
+            $pdata['unitcost'] = $item->price;
+
+            $product = Product::findOrFail($item->id);
+
+            if (!is_numeric($product->product_store))
+                $product->product_store = 0;
+
+            $product->update([
+                'product_store' => $product->product_store + (float) $item->qty
+            ]);
 
             PurchaseOrderDetail::insert($pdata);
         } // end foreach
 
         $notification = array(
-            'message' => 'Order Complete Successfully',
+            'message' => 'Order Purchase Complete Successfully',
             'alert-type' => 'success'
         );
 
-        Cart::destroy();
+        Cart::instance('purchase')->destroy();
 
-        return redirect()->route('dashboard')->with($notification);
+        return redirect()->route('all.purchase.order')->with($notification);
     } // End Method
 
     public function OrderStatusUpdate(Request $request)

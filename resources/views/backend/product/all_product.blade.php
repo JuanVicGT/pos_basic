@@ -34,7 +34,6 @@
                                     <th>Imagen</th>
                                     <th>Nombre</th>
                                     <th>Categoria</th>
-                                    <th>Proveedor</th>
                                     <th>Codigo</th>
                                     <th>Precio</th>
                                     <th>Acción</th>
@@ -48,7 +47,6 @@
                                     <td> <img src="{{ asset($item->product_image) }}" style="width:50px; height: 40px;"> </td>
                                     <td>{{ $item->product_name }}</td>
                                     <td>{{ $item['category']['category_name'] }}</td>
-                                    <td>{{ $item['supllier']['name'] }}</td>
                                     <td>{{ $item->product_code }}</td>
                                     <td>{{ $item->selling_price }}</td>
                                     <td>

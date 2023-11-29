@@ -197,11 +197,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('purchase.pending') }}">Compras pendientes </a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('purchase.complete') }}">Compras completas </a>
+                                <a href="{{ route('all.purchase.order') }}">Listado de Compras </a>
                             </li>
 
                         </ul>

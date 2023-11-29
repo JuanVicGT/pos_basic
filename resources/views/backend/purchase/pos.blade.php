@@ -10,10 +10,10 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">POS</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ingreso de compra</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">POS</h4>
+                        <h4 class="page-title">Ingreso de compra</h4>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                                                 <td>{{ $cart->name }}</td>
                                                 <td>
                                                     <form method="post"
-                                                        action="{{ route('purchase.cart.update' , $cart->rowId) }}">
+                                                        action="{{ route('purchase.cart.update', $cart->rowId) }}">
                                                         @csrf
                                                         <input type="number" name="qty" value="{{ $cart->qty }}"
                                                             style="width:40px;" min="1">
@@ -54,7 +54,7 @@
                                                 <td>{{ $cart->price }}</td>
                                                 <td>{{ $cart->price * $cart->qty }}</td>
 
-                                                <td> <a href="{{ route('purchase.cart.remove' , $cart->rowId) }}"><i
+                                                <td> <a href="{{ route('purchase.cart.remove', $cart->rowId) }}"><i
                                                             class="fas fa-trash-alt" style="color:#ffffff"></i></a> </td>
                                             </tr>
                                         @endforeach

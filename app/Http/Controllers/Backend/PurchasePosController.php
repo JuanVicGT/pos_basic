@@ -64,12 +64,4 @@ class PurchasePosController extends Controller
 
         return redirect()->back()->with($notification);
     } // End Method
-
-    public function CreateInvoice(Request $request)
-    {
-        $items = Cart::instance('purchase')->content();
-        $supplier_id = $request->supplier_id;
-        $supplier = Supplier::where('id', $supplier_id)->first();
-        return view('backend.purchase.product_invoice', compact('items', 'supplier'));
-    } // End Method
 }
