@@ -4,7 +4,11 @@
 /public/hot
 /public/storage
 
-
+/public/upload/admin_image
+/public/upload/customer
+/public/upload/employee
+/public/upload/product
+/public/upload/supplier
 
 /storage/*.key
 /vendor
