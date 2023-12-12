@@ -1,16 +1,17 @@
 <div class="left-side-menu">
     <div class="h-100" data-simplebar>
 
-        <!-- User box
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <ul id="side-menu">
-                <li class="menu-title">Menú</li>
+
+                <!-- Accesos directos -->
+                <li class="menu-title">Favoritos</li>
 
                 <li>
                     <a href="{{ url('/dashboard') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
-                        <span> Tablero </span>
+                        <span>Tablero</span>
                     </a>
                 </li>
 
@@ -18,11 +19,12 @@
                     <a href="{{ route('pos') }}">
                         <!-- <span class="badge bg-pink float-end">POS</span>-->
                         <i class="mdi mdi-cart"></i>
-                        <span> POS </span>
+                        <span>POS</span>
                     </a>
                 </li>
 
-                <li class="menu-title mt-2">Aplicaciones</li>
+                <!-- Módulo administación -->
+                <li class="menu-title mt-2">Administración</li>
 
                 <li>
                     <a href="#sidebarEcommerce" data-bs-toggle="collapse">
@@ -38,70 +40,6 @@
                             <li>
                                 <a href="{{ route('add.employee') }}">Agregar nuevo</a>
                             </li>
-
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="#sidebarCrm" data-bs-toggle="collapse">
-                        <i class="mdi mdi-account-multiple-outline"></i>
-                        <span> Clientes </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarCrm">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('all.customer') }}">Clientes</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('add.customer') }}">Agregar clientes</a>
-                            </li>
-
-
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="#sidebarEmail" data-bs-toggle="collapse">
-                        <i class="mdi mdi-email-multiple-outline"></i>
-                        <span> Correo </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarEmail">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="email-inbox.html">Inbox</a>
-                            </li>
-                            <li>
-                                <a href="email-read.html">Read Email</a>
-                            </li>
-                            <li>
-                                <a href="email-compose.html">Compose Email</a>
-                            </li>
-                            <li>
-                                <a href="email-templates.html">Email Templates</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="#sidebarSupplier" data-bs-toggle="collapse">
-                        <i class="mdi mdi-truck-fast"></i>
-                        <span> Proveedores </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarSupplier">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('all.supplier') }}">Mostrar Proveedores</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('add.supplier') }}">Agregar Proveedores</a>
-                            </li>
-
                         </ul>
                     </div>
                 </li>
@@ -123,7 +61,6 @@
                             <li>
                                 <a href="{{ route('pay.salary') }}">Pagar salarios</a>
                             </li>
-
                             <li>
                                 <a href="{{ route('month.salary') }}">Ultimo mes pagado</a>
                             </li>
@@ -142,106 +79,9 @@
                             <li>
                                 <a href="{{ route('employee.attend.list') }}">Asistencia de Empleados</a>
                             </li>
-
                         </ul>
                     </div>
                 </li>
-
-                <li>
-                    <a href="#category" data-bs-toggle="collapse">
-                        <i class="mdi mdi-shape-plus"></i>
-                        <span> Categorias </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="category">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('all.category') }}">Mostrar Categorias</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="#product" data-bs-toggle="collapse">
-                        <i class="mdi mdi-basket-outline"></i>
-                        <span> Productos </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="product">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('all.product') }}">Mostrar Productos</a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('add.product') }}">Agregar Productos</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Purchase orders -->
-                <li>
-                    <a href="#purchases" data-bs-toggle="collapse">
-                        <i class="mdi mdi-file-document"></i>
-                        <span> Compras </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="purchases">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('purchase.pos') }}">Nueva Compra</a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('all.purchase.order') }}">Listado de Compras </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Sale orders -->
-                <li>
-                    <a href="#orders" data-bs-toggle="collapse">
-                        <i class="mdi mdi-file-document"></i>
-                        <span> Ventas </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="orders">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('pending.order') }}">Ordenes pendientes </a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('complete.order') }}">Ordenes completas </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="#stock" data-bs-toggle="collapse">
-                        <i class="mdi mdi-counter"></i>
-                        <span> Manejo de inventario </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="stock">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('stock.manage') }}">Inventario </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="menu-title mt-2">Personalizado</li>
 
                 <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
@@ -266,16 +106,135 @@
                         </ul>
                     </div>
                 </li>
+
+                <!-- Módulo inventario -->
+                <li class="menu-title mt-2">Inventario</li>
+
+                <li>
+                    <a href="#category" data-bs-toggle="collapse">
+                        <i class="mdi mdi-shape-plus"></i>
+                        <span> Categorias </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="category">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.category') }}">Mostrar Categorias</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#product" data-bs-toggle="collapse">
+                        <i class="mdi mdi-basket-outline"></i>
+                        <span> Productos </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="product">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.product') }}">Mostrar Productos</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.product') }}">Agregar Productos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="{{ route('stock.manage') }}">
+                        <i class="mdi mdi-counter"></i>
+                        <span>Stock</span>
+                    </a>
+                </li>
+
+                <!-- Módulo de compras -->
+                <li class="menu-title mt-2">Compras</li>
+
+                <li>
+                    <a href="#sidebarSupplier" data-bs-toggle="collapse">
+                        <i class="mdi mdi-truck-fast"></i>
+                        <span> Proveedores </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarSupplier">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.supplier') }}">Mostrar Proveedores</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.supplier') }}">Agregar Proveedores</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#purchases" data-bs-toggle="collapse">
+                        <i class="mdi mdi-file-document"></i>
+                        <span> Compras </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="purchases">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('purchase.pos') }}">Nueva Compra</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('all.purchase.order') }}">Listado de Compras </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Módulo de ventas -->
+                <li class="menu-title mt-2">Ventas</li>
+
+                <li>
+                    <a href="#sidebarCrm" data-bs-toggle="collapse">
+                        <i class="mdi mdi-account-multiple-outline"></i>
+                        <span> Clientes </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarCrm">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.customer') }}">Clientes</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.customer') }}">Agregar clientes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#orders" data-bs-toggle="collapse">
+                        <i class="mdi mdi-file-document"></i>
+                        <span> Ventas </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="orders">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('pending.order') }}">Ordenes pendientes </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('complete.order') }}">Ordenes completas </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Módulo de reportes -->
+                <li class="menu-title mt-2">Reportes</li>
             </ul>
         </div>
-        </li>
-        </ul>
-
     </div>
     <!-- End Sidebar -->
-    <div class="clearfix"></div>
 
 </div>
 <!-- Sidebar -left -->
-
-</div>

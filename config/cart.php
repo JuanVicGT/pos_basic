@@ -10,9 +10,10 @@ return [
     | This default value is used to select the method to calculate prices and taxes
     | If true the item price is managed as a gross price, so taxes will be calculated by separation/exclusion
     |
+    | Default route: \Gloudemans\Shoppingcart\Calculation\DefaultCalculator::class
     */
 
-    'calculator' => \Gloudemans\Shoppingcart\Calculation\DefaultCalculator::class,
+    'calculator' => App\Http\Utils\CustomCartCalculator::class,
 
     /*
     |--------------------------------------------------------------------------

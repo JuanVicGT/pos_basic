@@ -31,16 +31,14 @@ use App\Http\Controllers\Backend\PurchaseOrderController;
 */
 
 Route::get('/', function () {
+    return view('index');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-    return view('welcome');
-});
 Route::get('/dashboard', function () {
-
     return view('index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -58,7 +56,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Empleados rutas
     Route::controller(EmployeeController::class)->group(function () {
-
         Route::get('/all/employee', 'AllEmployee')->name('all.employee');
         Route::get('/add/employee', 'AddEmployee')->name('add.employee');
         Route::post('/store/employee', 'StoreEmployee')->name('employee.store');
@@ -69,7 +66,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Clientes rutas 
     Route::controller(CustomerController::class)->group(function () {
-
         Route::get('/all/customer', 'AllCustomer')->name('all.customer');
         Route::get('/add/customer', 'AddCustomer')->name('add.customer');
         Route::post('/store/customer', 'StoreCustomer')->name('customer.store');
@@ -80,7 +76,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Proveedores rutas
     Route::controller(SupplierController::class)->group(function () {
-
         Route::get('/all/supplier', 'AllSupplier')->name('all.supplier');
         Route::get('/add/supplier', 'AddSupplier')->name('add.supplier');
         Route::post('/store/supplier', 'StoreSupplier')->name('supplier.store');
@@ -128,7 +123,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Productos rutas
     Route::controller(ProductController::class)->group(function () {
-
         Route::get('/all/product', 'AllProduct')->name('all.product');
         Route::get('/add/product', 'AddProduct')->name('add.product');
         Route::post('/store/product', 'StoreProduct')->name('product.store');
@@ -140,7 +134,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Gastos rutas
     Route::controller(ExpenseController::class)->group(function () {
-
         Route::get('/add/expense', 'AddExpense')->name('add.expense');
         Route::post('/store/expense', 'StoreExpense')->name('expense.store');
         Route::get('/today/expense', 'TodayExpense')->name('today.expense');
@@ -170,8 +163,8 @@ Route::middleware(['auth'])->group(function () {
 
     /// Purchase orders / Compras de productos
     Route::controller(PurchaseOrderController::class)->group(function () {
-        Route::get('/purchase/pending', 'ViewOrder')->name('all.purchase.order');
-        Route::get('/purchase/details/{order_id}', 'ViewOrderDetails')->name('purchase.order');
+        Route::get('/purchase', 'ListPurchase')->name('all.purchase.order');
+        Route::get('/purchase/{order_id}', 'ViewPurchase')->name('purchase.view');
         Route::post('/purchase/create-invoice', 'FinalInvoice')->name('purchase.create.invoice');
         Route::post('/purchase/status/update', 'OrderStatusUpdate')->name('purchase.order.status');
     });

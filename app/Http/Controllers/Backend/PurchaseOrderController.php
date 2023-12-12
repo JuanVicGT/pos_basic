@@ -15,18 +15,18 @@ use App\Http\Controllers\Controller;
 
 class PurchaseOrderController extends Controller
 {
-    public function ViewOrder()
+    public function ListPurchase()
     {
         $orders = PurchaseOrder::latest()->get();
         return view('backend.purchase.all_order', compact('orders'));
     } // End Method
 
-    public function ViewOrderDetails($order_id)
+    public function ViewPurchase($order_id)
     {
         $order = PurchaseOrder::where('id', $order_id)->first();
+        $items = PurchaseOrderDetail::with('product')->where('order_id', $order_id)->orderBy('id', 'DESC')->get();
 
-        $orderItem = PurchaseOrderDetail::with('product')->where('order_id', $order_id)->orderBy('id', 'DESC')->get();
-        return view('backend.purchase.order_details', compact('order', 'orderItem'));
+        return view('backend.purchase.view_order', compact('order', 'items'));
     } // End Method
 
     public function FinalInvoice(Request $request)
@@ -36,7 +36,6 @@ class PurchaseOrderController extends Controller
         $data['invoice_no'] = 'PPOS' . mt_rand(10000000, 99999999);
         $data['total_products'] = count(Cart::instance('purchase')->content());
         $data['total'] = Cart::instance('purchase')->total();
-        $data['order_status'] = 'SU SAPO';
 
         $data['order_date'] = Carbon::now();
         $data['created_at'] = Carbon::now();
@@ -47,10 +46,17 @@ class PurchaseOrderController extends Controller
         $pdata = array();
         foreach ($items as $item) {
             $pdata['order_id'] = $order_id;
-            $pdata['total'] = $item->total;
             $pdata['quantity'] = $item->qty;
             $pdata['product_id'] = $item->id;
             $pdata['unitcost'] = $item->price;
+
+            $pdata['tax'] = $item->pricetax;
+            $pdata['unittax'] = $item->tax;
+
+            $pdata['discount'] = $item->discountTotal;
+
+            $pdata['subtotal'] = $item->subtotal;
+            $pdata['total'] = $item->total;
 
             $product = Product::findOrFail($item->id);
 

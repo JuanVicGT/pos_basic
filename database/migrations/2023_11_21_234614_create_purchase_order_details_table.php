@@ -15,9 +15,16 @@ return new class extends Migration
             $table->id();
             $table->integer('order_id');
             $table->integer('product_id');
-            $table->string('quantity')->nullable();
-            $table->string('unitcost')->nullable();
-            $table->string('total')->nullable();
+
+            $table->float('quantity')->nullable();
+            $table->float('unitcost')->nullable();
+
+            $table->float('tax')->nullable();
+            $table->float('unittax')->nullable();
+
+            $table->float('discount')->nullable();
+            $table->float('subtotal')->nullable();
+            $table->float('total')->nullable();
             $table->timestamps();
         });
     }
