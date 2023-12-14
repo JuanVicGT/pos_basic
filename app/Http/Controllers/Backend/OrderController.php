@@ -55,57 +55,55 @@ class OrderController extends Controller
 
         return redirect()->route('dashboard')->with($notification);
     } // End Method
-    
-    public function PendingOrder(){
 
-        $orders = Order::where('order_status','pending')->get();
-        return view('backend.order.pending_order',compact('orders'));
+    public function PendingOrder()
+    {
+        $orders = Order::where('order_status', 'pending')->get();
+        return view('backend.order.pending_order', compact('orders'));
+    } // End Method
 
-    }// End Method
+    public function OrderDetails($order_id)
+    {
 
-    public function OrderDetails($order_id){
+        $order = Order::where('id', $order_id)->first();
 
-        $order = Order::where('id',$order_id)->first();
+        $orderItem = Orderdetails::with('product')->where('order_id', $order_id)->orderBy('id', 'DESC')->get();
+        return view('backend.order.order_details', compact('order', 'orderItem'));
+    } // End Method
 
-        $orderItem = Orderdetails::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
-        return view('backend.order.order_details',compact('order','orderItem'));
-
-    }// End Method
-
-    public function OrderStatusUpdate(Request $request){
+    public function OrderStatusUpdate(Request $request)
+    {
 
         $order_id = $request->id;
 
-        $product = Orderdetails::where('order_id',$order_id)->get();
-        foreach($product as $item){
-           Product::where('id',$item->product_id)
-                ->update(['product_store' => DB::raw('product_store-'.$item->quantity) ]);
+        $product = Orderdetails::where('order_id', $order_id)->get();
+        foreach ($product as $item) {
+            Product::where('id', $item->product_id)
+                ->update(['product_store' => DB::raw('product_store-' . $item->quantity)]);
         }
 
-     Order::findOrFail($order_id)->update(['order_status' => 'complete']);
+        Order::findOrFail($order_id)->update(['order_status' => 'complete']);
 
-         $notification = array(
+        $notification = array(
             'message' => 'Order Done Successfully',
             'alert-type' => 'success'
-        ); 
+        );
 
         return redirect()->route('pending.order')->with($notification);
+    } // End Method
 
+    public function CompleteOrder()
+    {
 
-    }// End Method
+        $orders = Order::where('order_status', 'complete')->get();
+        return view('backend.order.complete_order', compact('orders'));
+    } // End Method
 
-    public function CompleteOrder(){
-
-        $orders = Order::where('order_status','complete')->get();
-        return view('backend.order.complete_order',compact('orders'));
-
-    }// End Method
-
-    public function StockManage(){
+    public function StockManage()
+    {
 
         $product = Product::latest()->get();
-        return view('backend.stock.all_stock',compact('product'));
-    
-        }// End Method 
+        return view('backend.stock.all_stock', compact('product'));
+    } // End Method 
 
 }

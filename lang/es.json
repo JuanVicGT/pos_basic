@@ -36,5 +36,11 @@
     "date": "Fecha",
     "total": "Total",
     "created-at": "Fecha de creación",
-    "updated-at": "Fecha de actualización"
+    "updated-at": "Fecha de actualización",
+    "see": "Ver",
+    "category": "Categoria",
+    "image": "Imagen",
+    "name": "Nombre",
+    "quantity": "Cantidad",
+    "actions": "Acciones"
 }

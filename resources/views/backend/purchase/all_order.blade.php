@@ -44,8 +44,9 @@
                                             <td>{{ $item->invoice_no }}</td>
                                             <td>
                                                 <a href="{{ route('purchase.view', $item->id) }}"
-                                                    class="btn btn-blue rounded-pill waves-effect waves-light"> Details </a>
-
+                                                    class="btn btn-primary rounded-pill waves-effect waves-light"
+                                                    title="Detalles"><i class="fa fa-eye"
+                                                        aria-hidden="true"></i> {{ __('see') }} </a>
                                             </td>
                                         </tr>
                                     @endforeach

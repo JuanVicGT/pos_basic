@@ -69,8 +69,8 @@
                                                     <th>Nombre</th>
                                                     <th>Codigo</th>
                                                     <th>Cantidad</th>
-                                                    <th>Precio</th>
-                                                    <th>Total(+IVA)</th>
+                                                    <th>Costo</th>
+                                                    <th>Total</th>
                                                 </tr>
                                             </thead>
 
@@ -80,7 +80,7 @@
                                                         <td>{{ $item->product->product_name }}</td>
                                                         <td>{{ $item->product->product_code }}</td>
                                                         <td>{{ $item->quantity }}</td>
-                                                        <td>{{ $item->product->selling_price }}</td>
+                                                        <td>{{ $item->product->buying_price }}</td>
                                                         <td>{{ $item->total }}</td>
                                                     </tr>
                                                 @endforeach
