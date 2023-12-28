@@ -169,13 +169,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/purchase/status/update', 'OrderStatusUpdate')->name('purchase.order.status');
     });
 
-    ///Ordenes Rutas 
+    /// Orders / Ventas
     Route::controller(OrderController::class)->group(function () {
         Route::post('/final-invoice', 'FinalInvoice');
-        Route::get('/pending/order', 'PendingOrder')->name('pending.order');
+        Route::get('/order', 'ListOrder')->name('all.order');
         Route::get('/order/details/{order_id}', 'OrderDetails')->name('order.details');
         Route::post('/order/status/update', 'OrderStatusUpdate')->name('order.status.update');
-        Route::get('/complete/order', 'CompleteOrder')->name('complete.order');
         Route::get('/stock', 'StockManage')->name('stock.manage');
     });
 }); // End User Middleware 

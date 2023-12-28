@@ -15,7 +15,7 @@
                                     class="btn btn-primary rounded-pill waves-effect waves-light">Nueva venta</a>
                             </ol>
                         </div>
-                        <h4 class="page-title">Listado de ventas</h4>
+                        <h4 class="page-title">{{ __('list-sales') }}</h4>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                                         <th>{{ __('date') }}</th>
                                         <th>{{ __('payment') }}</th>
                                         <th>{{ __('code') }}</th>
-                                        <th>{{ __('pay') }}</th>
+                                        <th>{{ __('amount') }}</th>
                                         <th>{{ __('actions') }}</th>
                                     </tr>
                                 </thead>
@@ -51,11 +51,11 @@
                                             <td>{{ $item->payment_status }}</td>
                                             <td>{{ $item->invoice_no }}</td>
                                             <td>{{ $item->pay }}</td>
-                                            <td> <span class="badge bg-danger">{{ $item->order_status }}</span> </td>
                                             <td>
                                                 <a href="{{ route('order.details', $item->id) }}"
-                                                    class="btn btn-blue rounded-pill waves-effect waves-light"> Details </a>
-
+                                                    class="btn btn-blue rounded-pill waves-effect waves-light">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    {{ __('see') }} </a>
                                             </td>
                                         </tr>
                                     @endforeach

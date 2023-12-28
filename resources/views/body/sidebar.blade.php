@@ -108,36 +108,28 @@
                 </li>
 
                 <!-- Módulo inventario -->
-                <li class="menu-title mt-2">Inventario</li>
+                <li class="menu-title mt-2">{{ __('inventory') }}</li>
 
                 <li>
-                    <a href="#category" data-bs-toggle="collapse">
+                    <a href="{{ route('all.category') }}">
                         <i class="mdi mdi-shape-plus"></i>
-                        <span> Categorias </span>
-                        <span class="menu-arrow"></span>
+                        <span>{{ __('list-categories') }}</span>
                     </a>
-                    <div class="collapse" id="category">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('all.category') }}">Mostrar Categorias</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <li>
                     <a href="#product" data-bs-toggle="collapse">
                         <i class="mdi mdi-basket-outline"></i>
-                        <span> Productos </span>
+                        <span> {{ __('products') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="product">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('all.product') }}">Mostrar Productos</a>
+                                <a href="{{ route('add.product') }}">{{ __('add-product') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('add.product') }}">Agregar Productos</a>
+                                <a href="{{ route('all.product') }}">{{ __('list-products') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -146,28 +138,27 @@
                 <li>
                     <a href="{{ route('stock.manage') }}">
                         <i class="mdi mdi-counter"></i>
-                        <span>Stock</span>
+                        <span>{{ __('stock') }}</span>
                     </a>
                 </li>
 
                 <!-- Módulo de compras -->
-                <li class="menu-title mt-2">Compras</li>
+                <li class="menu-title mt-2">{{ __('purchases') }}</li>
 
                 <li>
                     <a href="#sidebarSupplier" data-bs-toggle="collapse">
                         <i class="mdi mdi-truck-fast"></i>
-                        <span> Proveedores </span>
+                        <span> {{ __('suppliers') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarSupplier">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('all.supplier') }}">Mostrar Proveedores</a>
+                                <a href="{{ route('add.supplier') }}">{{ __('add-supplier') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('add.supplier') }}">Agregar Proveedores</a>
+                                <a href="{{ route('all.supplier') }}">{{ __('list-supplier') }}</a>
                             </li>
-
                         </ul>
                     </div>
                 </li>
@@ -175,62 +166,51 @@
                 <li>
                     <a href="#purchases" data-bs-toggle="collapse">
                         <i class="mdi mdi-file-document"></i>
-                        <span> Compras </span>
+                        <span> {{ __('purchases') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="purchases">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('purchase.pos') }}">Nueva Compra</a>
+                                <a href="{{ route('purchase.pos') }}"> {{ __('add-purchase') }} </a>
                             </li>
                             <li>
-                                <a href="{{ route('all.purchase.order') }}">Listado de Compras </a>
+                                <a href="{{ route('all.purchase.order') }}"> {{ __('list-purchases') }} </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <!-- Módulo de ventas -->
-                <li class="menu-title mt-2">Ventas</li>
+                <li class="menu-title mt-2">{{ __('sales') }}</li>
 
                 <li>
                     <a href="#sidebarCrm" data-bs-toggle="collapse">
                         <i class="mdi mdi-account-multiple-outline"></i>
-                        <span> Clientes </span>
+                        <span> {{ __('customers') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarCrm">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('all.customer') }}">Clientes</a>
+                                <a href="{{ route('add.customer') }}">{{ __('add-customer') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('add.customer') }}">Agregar clientes</a>
+                                <a href="{{ route('all.customer') }}">{{ __('list-customers') }}</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li>
-                    <a href="#orders" data-bs-toggle="collapse">
+                    <a href="{{ route('all.order') }}">
                         <i class="mdi mdi-file-document"></i>
-                        <span> Ventas </span>
-                        <span class="menu-arrow"></span>
+                        <span>{{ __('list-sales') }}</span>
                     </a>
-                    <div class="collapse" id="orders">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('pending.order') }}">Ordenes pendientes </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('complete.order') }}">Ordenes completas </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <!-- Módulo de reportes -->
-                <li class="menu-title mt-2">Reportes</li>
+                <li class="menu-title mt-2">{{ __('reports') }}</li>
             </ul>
         </div>
     </div>

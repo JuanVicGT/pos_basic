@@ -56,10 +56,10 @@ class OrderController extends Controller
         return redirect()->route('dashboard')->with($notification);
     } // End Method
 
-    public function PendingOrder()
+    public function ListOrder()
     {
         $orders = Order::where('order_status', 'pending')->get();
-        return view('backend.order.pending_order', compact('orders'));
+        return view('backend.order.all_sale', compact('orders'));
     } // End Method
 
     public function OrderDetails($order_id)

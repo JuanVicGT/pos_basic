@@ -12,7 +12,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <a href="{{ route('add.product') }}"
-                                    class="btn btn-primary rounded-pill waves-effect waves-light">Add Product </a>
+                                    class="btn btn-primary rounded-pill waves-effect waves-light">{{ __('add-product') }}</a>
                             </ol>
                         </div>
                         <h4 class="page-title">Stock</h4>
@@ -25,7 +25,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-
 
                             <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                                 <thead>
