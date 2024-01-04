@@ -15,16 +15,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->date('order_date');
             $table->integer('customer_id');
-            $table->string('order_date');
-            $table->string('total_products');
-            $table->string('sub_total')->nullable();
-            $table->string('vat')->nullable();
+            $table->integer('total_products');
+            $table->float('sub_total')->nullable();
+            $table->float('tax')->nullable();
             $table->string('invoice_no')->nullable();
-            $table->string('total')->nullable();
-            $table->string('payment_status')->nullable();
-            $table->string('pay')->nullable();
-            $table->string('due')->nullable();
+            $table->float('total')->nullable();
+            $table->float('pay')->nullable();
             $table->timestamps();
         });
     }

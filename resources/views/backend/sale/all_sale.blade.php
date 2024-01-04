@@ -55,7 +55,7 @@
                                                 <a href="{{ route('order.details', $item->id) }}"
                                                     class="btn btn-blue rounded-pill waves-effect waves-light">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    {{ __('see') }} </a>
+                                                        {{ __('see') }} </a>
                                             </td>
                                         </tr>
                                     @endforeach

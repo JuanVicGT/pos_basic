@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('supplier_id');
             $table->string('order_date');
-            $table->string('total_products');
+            $table->integer('total_products');
             $table->string('invoice_no')->nullable();
-            $table->string('total')->nullable();
+            $table->float('total')->nullable();
             $table->timestamps();
         });
     }

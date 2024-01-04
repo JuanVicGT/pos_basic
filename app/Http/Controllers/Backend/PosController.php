@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Customer;
+use App\Models\Order;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class PosController extends Controller
@@ -65,13 +67,17 @@ class PosController extends Controller
         return redirect()->back()->with($notification);
     } // End Method
 
-    public function CreateInvoice(Request $request){
-
+    public function CreateInvoice(Request $request)
+    {
         $contents = Cart::content();
         $cust_id = $request->customer_id;
-        $customer = Customer::where('id',$cust_id)->first();
-        return view('backend.invoice.product_invoice',compact('contents','customer'));
+        $customer = Customer::where('id', $cust_id)->first();
 
-   } // End Method
+        $order = new Order();
+        $order->invoice_no = 'EPOS' . mt_rand(10000000, 99999999);
+        $order->order_date = Carbon::now();
+
+        return view('backend.invoice.product_invoice', compact('customer', 'contents', 'order'));
+    } // End Method
 
 }

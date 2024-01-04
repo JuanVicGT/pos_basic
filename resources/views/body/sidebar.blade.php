@@ -157,7 +157,7 @@
                                 <a href="{{ route('add.supplier') }}">{{ __('add-supplier') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('all.supplier') }}">{{ __('list-supplier') }}</a>
+                                <a href="{{ route('all.supplier') }}">{{ __('list-suppliers') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -211,6 +211,13 @@
 
                 <!-- Módulo de reportes -->
                 <li class="menu-title mt-2">{{ __('reports') }}</li>
+
+                <li>
+                    <a href="{{ route('report.difference') }}">
+                        <i class="mdi mdi-ab-testing"></i>
+                        <span>{{ __('difference') }}</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

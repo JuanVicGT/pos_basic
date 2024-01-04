@@ -35,7 +35,7 @@ class PurchaseOrderController extends Controller
         $data['supplier_id'] = $request->supplier_id;
         $data['invoice_no'] = 'PPOS' . mt_rand(10000000, 99999999);
         $data['total_products'] = count(Cart::instance('purchase')->content());
-        $data['total'] = Cart::instance('purchase')->total();
+        $data['total'] = (float) Cart::instance('purchase')->total(6, '.', '');
 
         $data['order_date'] = Carbon::now();
         $data['created_at'] = Carbon::now();

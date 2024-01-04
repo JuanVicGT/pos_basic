@@ -52,7 +52,7 @@
 
                                     <div class="col-md-12 mb-6">
                                         <x-input-label :value="__('total')" class="form-label" />
-                                        <x-text-input class="form-control" type="text" :value="'Q ' . $order->total" readonly />
+                                        <x-text-input class="form-control" type="text" :value="'Q ' . number_format($order->total, 2)" readonly />
                                     </div>
 
                                 </div> <!-- end row -->
@@ -81,7 +81,7 @@
                                                         <td>{{ $item->product->product_code }}</td>
                                                         <td>{{ $item->quantity }}</td>
                                                         <td>{{ $item->product->buying_price }}</td>
-                                                        <td>{{ $item->total }}</td>
+                                                        <td>{{ number_format($item->total, 2) }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

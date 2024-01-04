@@ -20,30 +20,36 @@ class OrderController extends Controller
         $data = array();
         $data['customer_id'] = $request->customer_id;
         $data['order_date'] = $request->order_date;
-        $data['order_status'] = $request->order_status;
-        $data['total_products'] = $request->total_products;
-        $data['sub_total'] = $request->sub_total;
-        $data['vat'] = $request->vat;
+        $data['total_products'] = (int) $request->total_products;
+        $data['sub_total'] = (float) $request->sub_total;
+        $data['tax'] = (float) $request->tax;
 
-        $data['invoice_no'] = 'EPOS' . mt_rand(10000000, 99999999);
-        $data['total'] = $request->total;
-        $data['payment_status'] = $request->payment_status;
-        $data['pay'] = $request->pay;
-        $data['due'] = $request->due;
+        $data['invoice_no'] = $request->invoice_no;
+        $data['total'] = (float) Cart::total(6, '.', '');
+        $data['pay'] = (float) $request->pay;
         $data['created_at'] = Carbon::now();
 
         $order_id = Order::insertGetId($data);
         $contents = Cart::content();
 
         $pdata = array();
-        foreach ($contents as $content) {
+        foreach ($contents as $item) {
             $pdata['order_id'] = $order_id;
-            $pdata['product_id'] = $content->id;
-            $pdata['quantity'] = $content->qty;
-            $pdata['unitcost'] = $content->price;
-            $pdata['total'] = $content->total;
+            $pdata['product_id'] = $item->id;
+            $pdata['quantity'] = $item->qty;
+            $pdata['unitcost'] = $item->price;
+            $pdata['total'] = $item->total;
 
-            $insert = Orderdetails::insert($pdata);
+            $product = Product::findOrFail($item->id);
+
+            if (!is_numeric($product->product_store))
+                $product->product_store = -1;
+
+            $product->update([
+                'product_store' => $product->product_store - (float) $item->qty
+            ]);
+
+            Orderdetails::insert($pdata);
         } // end foreach
 
         $notification = array(
@@ -53,13 +59,13 @@ class OrderController extends Controller
 
         Cart::destroy();
 
-        return redirect()->route('dashboard')->with($notification);
+        return redirect()->route('pos')->with($notification);
     } // End Method
 
     public function ListOrder()
     {
-        $orders = Order::where('order_status', 'pending')->get();
-        return view('backend.order.all_sale', compact('orders'));
+        $orders = Order::latest()->get();
+        return view('backend.sale.all_sale', compact('orders'));
     } // End Method
 
     public function OrderDetails($order_id)
@@ -68,7 +74,7 @@ class OrderController extends Controller
         $order = Order::where('id', $order_id)->first();
 
         $orderItem = Orderdetails::with('product')->where('order_id', $order_id)->orderBy('id', 'DESC')->get();
-        return view('backend.order.order_details', compact('order', 'orderItem'));
+        return view('backend.sale.order_details', compact('order', 'orderItem'));
     } // End Method
 
     public function OrderStatusUpdate(Request $request)
@@ -96,7 +102,7 @@ class OrderController extends Controller
     {
 
         $orders = Order::where('order_status', 'complete')->get();
-        return view('backend.order.complete_order', compact('orders'));
+        return view('backend.sale.complete_order', compact('orders'));
     } // End Method
 
     public function StockManage()
