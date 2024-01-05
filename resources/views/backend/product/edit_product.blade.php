@@ -62,9 +62,17 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Codigo</label>
+                                                <label for="firstname" class="form-label">Código</label>
                                                 <input type="text" name="product_code" class="form-control "
                                                     value="{{ $product->product_code }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="barcode" class="form-label">Código de barras</label>
+                                                <input type="text" name="barcode" class="form-control "
+                                                    value="{{ $product->barcode }}">
                                             </div>
                                         </div>
 
@@ -161,7 +169,7 @@
                         required: true,
                     },
                     product_image: {
-                        required: true,
+                        required: false,
                     },
                 },
                 messages: {

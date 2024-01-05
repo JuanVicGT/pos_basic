@@ -17,12 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('product_name');
             $table->integer('category_id');
-            $table->string('product_code');
+            $table->string('barcode')->unique()->nullable();
+            $table->string('product_code')->unique();
             $table->string('product_garage')->nullable();
             $table->string('product_image');
             $table->string('product_store')->nullable();
-            $table->string('buying_price')->nullable();
-            $table->string('selling_price')->nullable();
+            $table->float('buying_price')->nullable();
+            $table->float('selling_price')->nullable();
             $table->timestamps();
         });
     }

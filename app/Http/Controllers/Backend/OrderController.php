@@ -21,8 +21,8 @@ class OrderController extends Controller
         $data['customer_id'] = $request->customer_id;
         $data['order_date'] = $request->order_date;
         $data['total_products'] = (int) $request->total_products;
-        $data['sub_total'] = (float) $request->sub_total;
-        $data['tax'] = (float) $request->tax;
+        $data['sub_total'] = (float) Cart::subtotal(6, '.', '');
+        $data['tax'] = (float) Cart::tax(6, '.', '');
 
         $data['invoice_no'] = $request->invoice_no;
         $data['total'] = (float) Cart::total(6, '.', '');

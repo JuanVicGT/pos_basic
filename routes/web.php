@@ -130,7 +130,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
         Route::post('/update/product', 'UdateProduct')->name('product.update');
         Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
-        Route::get('/barcode/product/{id}', 'BarcodeProduct')->name('barcode.product');
+        Route::post('/barcode/product', 'BarcodeProduct')->name('barcode.product');
     });
 
     /// Gastos rutas
@@ -147,7 +147,8 @@ Route::middleware(['auth'])->group(function () {
     ///POS rutas 
     Route::controller(PosController::class)->group(function () {
         Route::get('/pos', 'Pos')->name('pos');
-        Route::post('/add-cart', 'AddCart');
+        Route::post('/add-cart', 'AddCart')->name('add.cart');
+        Route::post('/add-barcode-cart', 'AddBarcodeCart')->name('add.barcode.cart');
         Route::get('/allitem', 'AllItem');
         Route::post('/cart-update/{rowId}', 'CartUpdate');
         Route::get('/cart-remove/{rowId}', 'CartRemove');

@@ -36,6 +36,29 @@ class PosController extends Controller
         return redirect()->back()->with($notification);
     } // End Method 
 
+    public function AddBarcodeCart(Request $request)
+    {
+        /** @var Product */
+        $product = Product::firstWhere('barcode', $request->barcode);
+
+        if (empty($product->id))
+            return redirect()->back();
+
+        Cart::add([
+            'id' => $product->id,
+            'name' => $product->product_name,
+            'qty' => 1,
+            'price' => $product->selling_price,
+            'weight' => 20,
+            'options' => ['size' => 'large']
+        ]);
+        $notification = array(
+            'message' => 'Product Added Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    } // End Method 
+
     public function AllItem()
     {
         $product_item = Cart::content();

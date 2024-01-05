@@ -69,6 +69,7 @@ class ProductController extends Controller
 
             Product::findOrFail($product_id)->update([
                 'product_name' => $request->product_name,
+                'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
                 'product_code' => $request->product_code,
                 'product_garage' => $request->product_garage,
@@ -88,6 +89,7 @@ class ProductController extends Controller
         } else {
             Product::findOrFail($product_id)->update([
                 'product_name' => $request->product_name,
+                'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
                 'product_code' => $request->product_code,
                 'product_garage' => $request->product_garage,
@@ -122,14 +124,11 @@ class ProductController extends Controller
         return redirect()->back()->with($notification);
     } // End Method
 
-    public function BarcodeProduct($id)
+    public function BarcodeProduct(Request $request)
     {
-        $product = Product::findOrFail($id);
-        return view('backend.product.barcode_product', compact('product'));
-    } // End Method
+        $product = Product::findOrFail($request->item_id);
+        $qty = $request->qty ?? 1;
 
-    public function getSupplierName($supplier_id)
-    {
-        return 'JAPOLINATO';
-    }
+        return view('backend.product.barcode_product', compact('product', 'qty'));
+    } // End Method
 }

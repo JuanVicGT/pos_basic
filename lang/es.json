@@ -81,5 +81,8 @@
     "Select Payment": "Seleccione método de pago",
     "Payment": "Pago",
     "total-amount": "Monto total",
-    "complete": "Completar"
+    "complete": "Completar",
+    "view": "Ver",
+    "barcode": "Código de barras",
+    "no-have-barcode": "El producto no posee código de barras"
 }

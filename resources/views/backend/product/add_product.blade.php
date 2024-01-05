@@ -43,7 +43,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-3">
+                                                <label for="barcode" class="form-label">Código de barras</label>
+                                                <input type="text" name="barcode" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="firstname" class="form-label">Categoria*</label>
                                                 <select name="category_id" class="form-select" id="example-select">
