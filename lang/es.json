@@ -74,6 +74,9 @@
     "payment": "Método de pago",
     "details": "Detalles",
     "proof-of-purchase": "Comprobante de compra",
+    "desc": "Desc.",
+    "description": "Descripción",
+    "articles-total-qty": "Total de articulos",
     "handcash": "Efectivo",
     "cheque": "Cheque",
     "card": "Tarjeta",
@@ -84,5 +87,10 @@
     "complete": "Completar",
     "view": "Ver",
     "barcode": "Código de barras",
-    "no-have-barcode": "El producto no posee código de barras"
+    "no-have-barcode": "El producto no posee código de barras",
+    "print-ticket": "Imprimir ticket",
+    "print-pdf": "Generar PDF",
+    "gain": "Ganancia",
+    "gains": "Ganancias",
+    "general-balance": "Balance General"
 }

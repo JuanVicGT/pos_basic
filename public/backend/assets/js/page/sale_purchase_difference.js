@@ -3,6 +3,7 @@ $(document).ready(function () {
     $('#report-datatable').dataTable( {
         retrieve: true,
         paging: false,
-        searching: false
+        searching: false,
+        info: false
     } );
 });

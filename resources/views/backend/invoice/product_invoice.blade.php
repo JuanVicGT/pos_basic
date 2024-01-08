@@ -104,8 +104,6 @@
 
                             <div class="mt-4 mb-1">
                                 <div class="text-end d-print-none">
-                                    <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i
-                                            class="mdi mdi-printer me-1"></i> Imprimir</a>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#signup-modal">Crear factura </button>
                                 </div>

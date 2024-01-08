@@ -24,17 +24,12 @@
                                         class="mdi mdi-printer me-1"></i> Imprimir</a>
                             </ol>
                         </div>
-                        <h4 class="page-title">{{ __('difference') }}</h4>
+                        <h4 class="page-title">{{ __('general-balance') }}</h4>
                     </div>
                 </div>
             </div>
             <!-- end page title -->
 
-            <div class="row">
-                <div class="col-12">
-                    <h3>{{ __('difference') }}</h3>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12">
                     <table id="report-datatable" class="display table dt-responsive nowrap w-100">
@@ -59,7 +54,7 @@
                                     <td>{{ __('sale') }}</td>
                                     <td>{{ $sale->order_date }}</td>
                                     <td>{{ $sale->customer->name }}</td>
-                                    <td class="text-success">{{ $sale->total }}</td>
+                                    <td class="text-success">Q {{ number_format($sale->total, 4) }}</td>
                                 </tr>
                             @endforeach
 
@@ -73,16 +68,39 @@
                                     <td>{{ __('purchase') }}</td>
                                     <td>{{ $purchase->order_date }}</td>
                                     <td>{{ $purchase->supplier->name }}</td>
-                                    <td class="text-danger">{{ $purchase->total }}</td>
+                                    <td class="text-danger">Q {{ number_format($purchase->total, 4) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
 
-                    <div class="row">
-                        <p>{{ $saleAmount }}</p>
-                        <p>{{ $purchaseAmount }}</p>
-                        <p>{{ $total }}</p>
+                    @php
+                        $total = $saleAmount - $purchaseAmount;
+                    @endphp
+                    <hr>
+
+                    <div class="row text-center">
+                        <table id="report-datatable" class="display table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>{{ __('purchases') }}</th>
+                                    <th>{{ __('sales') }}</th>
+                                    <th>{{ __('general-balance') }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td class="text-danger">Q {{ number_format($purchaseAmount, 4) }}</td>
+                                    <td class="text-success">Q {{ number_format($saleAmount, 4) }}</td>
+                                    @if ($total > 0)
+                                        <td class="text-success">Q {{ number_format($total, 4) }}</td>
+                                    @else
+                                        <td class="text-danger">Q {{ number_format($total, 4) }}</td>
+                                    @endif
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div><!-- end col-->
             </div>

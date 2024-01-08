@@ -8,12 +8,13 @@ use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Orderdetails;
+use App\Models\User;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
-
 {
     public function FinalInvoice(Request $request)
     {
@@ -59,6 +60,12 @@ class OrderController extends Controller
 
         Cart::destroy();
 
+        $id = Auth::user()->id;
+        $user = User::findOrFail($id);
+
+        $order = Order::findOrFail($user->printer);
+        $order->printTicket();
+
         return redirect()->route('pos')->with($notification);
     } // End Method
 
@@ -70,7 +77,6 @@ class OrderController extends Controller
 
     public function OrderDetails($order_id)
     {
-
         $order = Order::where('id', $order_id)->first();
 
         $orderItem = Orderdetails::with('product')->where('order_id', $order_id)->orderBy('id', 'DESC')->get();
@@ -79,7 +85,6 @@ class OrderController extends Controller
 
     public function OrderStatusUpdate(Request $request)
     {
-
         $order_id = $request->id;
 
         $product = Orderdetails::where('order_id', $order_id)->get();
@@ -100,16 +105,40 @@ class OrderController extends Controller
 
     public function CompleteOrder()
     {
-
         $orders = Order::where('order_status', 'complete')->get();
         return view('backend.sale.complete_order', compact('orders'));
     } // End Method
 
     public function StockManage()
     {
-
         $product = Product::latest()->get();
         return view('backend.stock.all_stock', compact('product'));
     } // End Method 
 
+    public function PrintTicket(Request $request)
+    {
+        $id = Auth::user()->id;
+        $user = User::findOrFail($id);
+
+        /** @var Order */
+        $order = Order::findOrFail($request->id);
+
+        if (empty($order->invoice_no)) {
+            $notification = array(
+                'message' => 'Proof not found',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
+        $order->printTicket($user->printer);
+
+        $notification = array(
+            'message' => 'Printed Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    } // End Method 
 }

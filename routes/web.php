@@ -175,6 +175,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::post('/final-invoice', 'FinalInvoice');
         Route::get('/order', 'ListOrder')->name('all.order');
+        Route::get('/ticket/order/{id}', 'PrintTicket')->name('ticket.order');
         Route::get('/order/details/{order_id}', 'OrderDetails')->name('order.details');
         Route::post('/order/status/update', 'OrderStatusUpdate')->name('order.status.update');
         Route::get('/stock', 'StockManage')->name('stock.manage');
