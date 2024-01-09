@@ -92,5 +92,9 @@
     "print-pdf": "Generar PDF",
     "gain": "Ganancia",
     "gains": "Ganancias",
-    "general-balance": "Balance General"
+    "general-balance": "Balance General",
+    "Printer": "Impresora",
+    "printer": "Impresora",
+    "name-printer": "Nombre de Impresora",
+    "Name Printer": "Nombre de Impresora"
 }

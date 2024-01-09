@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\PurchaseOrder;
 use App\Models\User;
 
-class PurchaseOrderPolicy
+class UserPolicy
 {
-    private const MODEL_NAME = 'purchase';
+    private const MODEL_NAME = 'user';
 
     /**
      * Determine whether the user can view any models.
@@ -21,7 +20,7 @@ class PurchaseOrderPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, PurchaseOrder $purchaseOrder): bool
+    public function view(User $user, User $model): bool
     {
         //
         return $user->admin || $user->hasPermissionTo('can_' . self::MODEL_NAME);
@@ -39,7 +38,7 @@ class PurchaseOrderPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, PurchaseOrder $purchaseOrder): bool
+    public function update(User $user, User $model): bool
     {
         //
         return $user->admin || $user->hasPermissionTo('can_' . self::MODEL_NAME);
@@ -48,7 +47,7 @@ class PurchaseOrderPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, PurchaseOrder $purchaseOrder): bool
+    public function delete(User $user, User $model): bool
     {
         //
         return $user->admin || $user->hasPermissionTo('can_' . self::MODEL_NAME);
@@ -57,7 +56,7 @@ class PurchaseOrderPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, PurchaseOrder $purchaseOrder): bool
+    public function restore(User $user, User $model): bool
     {
         //
         return false;
@@ -66,7 +65,7 @@ class PurchaseOrderPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, PurchaseOrder $purchaseOrder): bool
+    public function forceDelete(User $user, User $model): bool
     {
         //
         return false;
