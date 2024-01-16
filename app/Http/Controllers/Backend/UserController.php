@@ -15,6 +15,9 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Auth::user());
+
+        $users = User::latest()->get();
+        return view('backend.user.all_user', compact('users'));
     }
 
     /**
@@ -23,7 +26,9 @@ class UserController extends Controller
     public function create()
     {
         //
-        $this->authorize('create');
+        $this->authorize('create', Auth::user());
+
+        return view('backend.user.add_user');
     }
 
     /**

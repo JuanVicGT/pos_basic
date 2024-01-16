@@ -15,7 +15,6 @@ class UserSeeder extends Seeder
     {
         // Create users
         User::factory()->create([
-            'level' => 99,
             'admin' => true,
             'name' => 'admin',
             'phone' => '123',

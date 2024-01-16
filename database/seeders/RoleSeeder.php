@@ -53,9 +53,7 @@ class RoleSeeder extends Seeder
             'encargado' => [
                 'sale', 'purchase', 'expense', 'customer', 'supplier'
             ],
-            'gerente' => [
-                $this->getAllModels()
-            ]
+            'gerente' => $this->getAllModels()
         ];
     }
 

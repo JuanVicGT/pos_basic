@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PurchasePosController;
 use App\Http\Controllers\Backend\PurchaseOrderController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\UserController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -54,6 +55,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     Route::get('/change/password', [AdminController::class, 'ChangePassword'])->name('change.password');
     Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('update.password');
+
+    /// Usuarios (solo admin) rutas
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/all/user', 'index')->name('all.user');
+        Route::get('/add/user', 'create')->name('add.user');
+        Route::get('/store/user', 'store')->name('store.user');
+        Route::get('/edit/user/{id}', 'edit')->name('edit.user');
+        Route::get('/update/user', 'update')->name('update.user');
+        Route::get('/delete/user/{id}', 'destroy')->name('destroy.user');
+    });
 
     /// Empleados rutas
     Route::controller(EmployeeController::class)->group(function () {
