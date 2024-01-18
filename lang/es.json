@@ -98,5 +98,16 @@
     "name-printer": "Nombre de Impresora",
     "Name Printer": "Nombre de Impresora",
     "edit": "Editar",
-    "id": "ID"
+    "id": "ID",
+    "users": "Usuarios",
+    "list-users": "Lista de usuarios",
+    "role": "Rol",
+    "Role": "Rol",
+    "is-admin": "Es administrador",
+    "profile": "Perfil",
+    "admin-profile": "Editar perfil",
+    "phone": "Teléfono",
+    "email": "Correo",
+    "personal-info": "Información de perfil",
+    "username": "Usuario de inicion de sesión"
 }

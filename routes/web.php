@@ -60,10 +60,10 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/all/user', 'index')->name('all.user');
         Route::get('/add/user', 'create')->name('add.user');
-        Route::get('/store/user', 'store')->name('store.user');
+        Route::post('/store/user', 'store')->name('store.user');
         Route::get('/edit/user/{id}', 'edit')->name('edit.user');
-        Route::get('/update/user', 'update')->name('update.user');
-        Route::get('/delete/user/{id}', 'destroy')->name('destroy.user');
+        Route::post('/update/user', 'update')->name('update.user');
+        Route::post('/delete/user/{id}', 'destroy')->name('destroy.user');
     });
 
     /// Empleados rutas

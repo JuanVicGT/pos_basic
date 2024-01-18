@@ -15,97 +15,116 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('pos') }}">
-                        <!-- <span class="badge bg-pink float-end">POS</span>-->
-                        <i class="mdi mdi-cart"></i>
-                        <span>POS</span>
-                    </a>
-                </li>
+                @can('can_pos')
+                    <li>
+                        <a href="{{ route('pos') }}">
+                            <!-- <span class="badge bg-pink float-end">POS</span>-->
+                            <i class="mdi mdi-cart"></i>
+                            <span>POS</span>
+                        </a>
+                    </li>
+                @endcan
 
                 <!-- Módulo administación -->
                 <li class="menu-title mt-2">Administración</li>
 
-                <li>
-                    <a href="#sidebarEcommerce" data-bs-toggle="collapse">
-                        <i class="mdi mdi-badge-account-outline"></i>
-                        <span>Empleados</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarEcommerce">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('all.employee') }}">Lista</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('add.employee') }}">Agregar nuevo</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @if (auth()->user()->admin)
+                    <li>
+                        <a href="{{ route('all.user') }}">
+                            <i class="mdi mdi-account-multiple-outline"></i>
+                            <span>{{ __('list-users') }}</span>
+                        </a>
+                    </li>
+                @endif
 
-                <li>
-                    <a href="#sidebarSalary" data-bs-toggle="collapse">
-                        <i class="mdi mdi-cash-multiple"></i>
-                        <span> Salarios </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarSalary">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('add.advance.salary') }}">Agregar adelanto de salario</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('all.advance.salary') }}">Todos los adelantos de salario</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('pay.salary') }}">Pagar salarios</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('month.salary') }}">Ultimo mes pagado</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('can_employee')
+                    <li>
+                        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                            <i class="mdi mdi-badge-account-outline"></i>
+                            <span>Empleados</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarEcommerce">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('all.employee') }}">Lista</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('add.employee') }}">Agregar nuevo</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
-                <li>
-                    <a href="#attendence" data-bs-toggle="collapse">
-                        <i class="mdi mdi-check-underline-circle-outline"></i>
-                        <span> Asistencias de Empleados </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="attendence">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('employee.attend.list') }}">Asistencia de Empleados</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('paysalary')
+                    <li>
+                        <a href="#sidebarSalary" data-bs-toggle="collapse">
+                            <i class="mdi mdi-cash-multiple"></i>
+                            <span> Salarios </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarSalary">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('add.advance.salary') }}">Agregar adelanto de salario</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('all.advance.salary') }}">Todos los adelantos de salario</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('pay.salary') }}">Pagar salarios</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('month.salary') }}">Ultimo mes pagado</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
-                <li>
-                    <a href="#sidebarAuth" data-bs-toggle="collapse">
-                        <i class="mdi mdi-account-circle-outline"></i>
-                        <span> Gastos </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarAuth">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('add.expense') }}">Agregar Gasto</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('today.expense') }}">Gastos del dia</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('month.expense') }}">Gastos mensuales</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('year.expense') }}">Gastos anuales</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('assistance')
+                    <li>
+                        <a href="#attendence" data-bs-toggle="collapse">
+                            <i class="mdi mdi-check-underline-circle-outline"></i>
+                            <span> Asistencias de Empleados </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="attendence">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('employee.attend.list') }}">Asistencia de Empleados</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+                @can('expense')
+                    <li>
+                        <a href="#sidebarAuth" data-bs-toggle="collapse">
+                            <i class="mdi mdi-account-circle-outline"></i>
+                            <span> Gastos </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarAuth">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('add.expense') }}">Agregar Gasto</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('today.expense') }}">Gastos del dia</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('month.expense') }}">Gastos mensuales</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('year.expense') }}">Gastos anuales</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
                 <!-- Módulo inventario -->
                 <li class="menu-title mt-2">{{ __('inventory') }}</li>

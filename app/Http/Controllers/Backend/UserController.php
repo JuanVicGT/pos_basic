@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -34,10 +37,28 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
         //
-        $this->authorize('store');
+        $this->authorize('create', Auth::user());
+
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'printer' => $request->printer,
+            'admin' => $request->admin,
+            'password' => Hash::make('RUDEMAX2024')
+        ]);
+        $user->assignRole($request->role);
+
+        $notification = array(
+            'message' => 'User Insert Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.user');
     }
 
     /**
@@ -46,7 +67,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
-        $this->authorize('show');
+        $this->authorize('view', Auth::user());
     }
 
     /**
@@ -55,16 +76,34 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        $this->authorize('edit');
+        $this->authorize('update', Auth::user());
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request)
     {
-        //
-        $this->authorize('update');
+        $this->authorize('update', Auth::user());
+
+        $user = User::findOrFail($request->id)->update([
+            'username' => $request->username,
+            'email' => $request->email,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'printer' => $request->printer,
+            'admin' => $request->admin,
+            'password' => Hash::make('RUDEMAX2024')
+        ]);
+
+        $user->syncRoles([$request->role]);
+
+        $notification = array(
+            'message' => 'User Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -73,6 +112,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
-        $this->authorize('destroy');
+        $this->authorize('delete', Auth::user());
     }
 }

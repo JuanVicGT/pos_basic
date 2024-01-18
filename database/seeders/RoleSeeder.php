@@ -30,7 +30,7 @@ class RoleSeeder extends Seeder
      */
     private function getAllModels(): array
     {
-        return ['category', 'customer', 'employee', 'expense', 'pos', 'ppos', 'sale', 'purchase', 'paysalary', 'product', 'supplier'];
+        return ['category', 'customer', 'employee', 'expense', 'pos', 'ppos', 'sale', 'purchase', 'assistance', 'paysalary', 'product', 'supplier'];
     }
 
     private function createPermissions()
@@ -51,7 +51,7 @@ class RoleSeeder extends Seeder
                 'pos', 'ppos'
             ],
             'encargado' => [
-                'sale', 'purchase', 'expense', 'customer', 'supplier'
+                'sale', 'purchase', 'expense', 'customer', 'supplier', 'assistance', 'product'
             ],
             'gerente' => $this->getAllModels()
         ];
