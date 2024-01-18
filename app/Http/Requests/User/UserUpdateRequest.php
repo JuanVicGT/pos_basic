@@ -26,8 +26,8 @@ class UserUpdateRequest extends FormRequest
         return [
             // Required
             'id' => ['required', 'integer'],
-            'username' => ['required', 'string', 'max:255', Rule::unique(User::class)->ignore($this->request->get('id'))],
-            'email' => ['required', 'email', 'max:255', Rule::unique(User::class)->ignore($this->request->get('id'))],
+            'username' => ['required', 'string', 'max:255', Rule::unique(User::class, 'username')->ignore($this->request->get('id'))],
+            'email' => ['required', 'email', 'max:255', Rule::unique(User::class, 'email')->ignore($this->request->get('id'))],
             'role' => ['required', 'string', 'max:255'],
 
             // Optional

@@ -9,16 +9,16 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{  asset('backend/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
 
     <!-- Bootstrap css -->
-    <link href="{{  asset('backend/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
-    <link href="{{  asset('backend/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('backend/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
     <!-- icons -->
-    <link href="{{  asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Head js -->
-    <script src="{{  asset('backend/assets/js/head.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/head.js') }}"></script>
 
 </head>
 
@@ -36,13 +36,15 @@
                                 <div class="auth-logo">
                                     <a href="{{ route('dashboard') }}" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{  asset('backend/assets/images/logo-light1.png') }}" alt="" height="175">
+                                            <img src="{{ asset('backend/assets/images/logo-light1.png') }}"
+                                                alt="" height="175">
                                         </span>
                                     </a>
 
                                     <a href="{{ route('dashboard') }}" class="logo logo-light text-center">
                                         <span class="logo-lg">
-                                            <img src="{{  asset('backend/assets/images/logo-light1.png') }}" alt="" height="175">
+                                            <img src="{{ asset('backend/assets/images/logo-light1.png') }}"
+                                                alt="" height="175">
                                         </span>
                                     </a>
                                 </div>
@@ -52,19 +54,23 @@
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="login" class="form-label">Email/User/Telefono'</label>
-                                    <input class="form-control @error('login') is-invalid @enderror" name="login" type="text" id="login" required="" placeholder="Ingresa con email, usuario o telefono">
+                                    <label for="login" class="form-label">{{ __('username') }}</label>
+                                    <input class="form-control @error('login') is-invalid @enderror" name="login"
+                                        type="text" id="login" required autofocus
+                                        placeholder="Ingresa con email, usuario o telefono">
                                     @error('login')
-                                    <span class="text-danger"> El usuario o contraseña es incorrecto </span>
+                                        <span class="text-danger"> El usuario o contraseña es incorrecto </span>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Contraseña</label>
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter your password">
+                                        <input type="password" id="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            placeholder="Enter your password">
                                         @error('password')
-                                        <span class="text-danger"> El usuario o contraseña es incorrecto </span>
+                                            <span class="text-danger"> El usuario o contraseña es incorrecto </span>
                                         @enderror
                                         <div class="input-group-text" data-password="false">
                                             <span class="password-eye"></span>
@@ -85,7 +91,7 @@
 
                             </form>
 
-                            <!-- 
+                            <!--
                             <div class="text-center">
                                 <h5 class="mt-3 text-muted">Sign in with</h5>
                                 <ul class="social-list list-inline mt-3 mb-0">
@@ -108,12 +114,13 @@
                         </div> <!-- end card-body -->
                     </div>
                     <!-- end card -->
-                    <!-- 
+                    <!--
                     <div class="row mt-3">
                         <div class="col-12 text-center">
-                            <p> <a href="auth-recoverpw.html" class="text-white-50 ms-1">Forgot your password?</a></p> 
+                            <p> <a href="auth-recoverpw.html" class="text-white-50 ms-1">Forgot your password?</a></p>
                     -->
-                    <p class="text-white-50">Aun no tienes cuenta? <a href="/register" class="text-white ms-1"><b>Registrate</b></a></p>
+                    <p class="text-white-50">Aun no tienes cuenta? <a href="/register"
+                            class="text-white ms-1"><b>Registrate</b></a></p>
                 </div> <!-- end col -->
             </div>
             <!-- end row -->
@@ -127,15 +134,15 @@
     <!-- end page -->
 
     <footer class="footer footer-alt">
-        2023 - <script>
-        </script> &copy; Pos En linea by <a href="" class="text-white-50">Equipo dinamita</a>
+        2023 -
+        <script></script> &copy; Pos En linea by <a href="" class="text-white-50">Equipo dinamita</a>
     </footer>
 
     <!-- Vendor js -->
-    <script src="{{  asset('backend/assets/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/vendor.min.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{  asset('backend/assets/js/app.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/app.min.js') }}"></script>
 
 </body>
 

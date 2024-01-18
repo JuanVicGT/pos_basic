@@ -58,7 +58,7 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.user');
+        return redirect()->route('all.user')->with($notification);
     }
 
     /**
@@ -73,10 +73,14 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
         $this->authorize('update', Auth::user());
+
+        $user = User::findOrFail($id);
+        $role = $user->getRoleNames()[0] ?? null;
+
+        return view('backend.user.edit_user', compact('user', 'role'));
     }
 
     /**
@@ -86,14 +90,15 @@ class UserController extends Controller
     {
         $this->authorize('update', Auth::user());
 
-        $user = User::findOrFail($request->id)->update([
+        $user = User::findOrFail($request->id);
+        
+        $user->update([
             'username' => $request->username,
             'email' => $request->email,
             'name' => $request->name,
             'phone' => $request->phone,
             'printer' => $request->printer,
-            'admin' => $request->admin,
-            'password' => Hash::make('RUDEMAX2024')
+            'admin' => $request->admin
         ]);
 
         $user->syncRoles([$request->role]);

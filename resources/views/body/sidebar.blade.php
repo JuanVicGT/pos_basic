@@ -26,7 +26,9 @@
                 @endcan
 
                 <!-- Módulo administación -->
-                <li class="menu-title mt-2">Administración</li>
+                @canany(['can_employee', 'can_paysalary', 'can_assistance', 'can_expense'])
+                    <li class="menu-title mt-2">Administración</li>
+                @endcanany
 
                 @if (auth()->user()->admin)
                     <li>
@@ -57,7 +59,7 @@
                     </li>
                 @endcan
 
-                @can('paysalary')
+                @can('can_paysalary')
                     <li>
                         <a href="#sidebarSalary" data-bs-toggle="collapse">
                             <i class="mdi mdi-cash-multiple"></i>
@@ -83,7 +85,7 @@
                     </li>
                 @endcan
 
-                @can('assistance')
+                @can('can_assistance')
                     <li>
                         <a href="#attendence" data-bs-toggle="collapse">
                             <i class="mdi mdi-check-underline-circle-outline"></i>
@@ -100,7 +102,7 @@
                     </li>
                 @endcan
 
-                @can('expense')
+                @can('can_expense')
                     <li>
                         <a href="#sidebarAuth" data-bs-toggle="collapse">
                             <i class="mdi mdi-account-circle-outline"></i>
@@ -127,116 +129,136 @@
                 @endcan
 
                 <!-- Módulo inventario -->
-                <li class="menu-title mt-2">{{ __('inventory') }}</li>
+                @canany(['can_category', 'can_product'])
+                    <li class="menu-title mt-2">{{ __('inventory') }}</li>
+                @endcanany
 
-                <li>
-                    <a href="{{ route('all.category') }}">
-                        <i class="mdi mdi-shape-plus"></i>
-                        <span>{{ __('list-categories') }}</span>
-                    </a>
-                </li>
+                @can('can_category')
+                    <li>
+                        <a href="{{ route('all.category') }}">
+                            <i class="mdi mdi-shape-plus"></i>
+                            <span>{{ __('list-categories') }}</span>
+                        </a>
+                    </li>
+                @endcan
 
-                <li>
-                    <a href="#product" data-bs-toggle="collapse">
-                        <i class="mdi mdi-basket-outline"></i>
-                        <span> {{ __('products') }} </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="product">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('add.product') }}">{{ __('add-product') }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('all.product') }}">{{ __('list-products') }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('can_product')
+                    <li>
+                        <a href="#product" data-bs-toggle="collapse">
+                            <i class="mdi mdi-basket-outline"></i>
+                            <span> {{ __('products') }} </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="product">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('add.product') }}">{{ __('add-product') }}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('all.product') }}">{{ __('list-products') }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
 
-                <li>
-                    <a href="{{ route('stock.manage') }}">
-                        <i class="mdi mdi-counter"></i>
-                        <span>{{ __('stock') }}</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{ route('stock.manage') }}">
+                            <i class="mdi mdi-counter"></i>
+                            <span>{{ __('stock') }}</span>
+                        </a>
+                    </li>
+                @endcan
 
                 <!-- Módulo de compras -->
-                <li class="menu-title mt-2">{{ __('purchases') }}</li>
+                @canany(['can_supplier', 'can_purchase'])
+                    <li class="menu-title mt-2">{{ __('purchases') }}</li>
+                @endcanany
 
-                <li>
-                    <a href="#sidebarSupplier" data-bs-toggle="collapse">
-                        <i class="mdi mdi-truck-fast"></i>
-                        <span> {{ __('suppliers') }} </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarSupplier">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('add.supplier') }}">{{ __('add-supplier') }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('all.supplier') }}">{{ __('list-suppliers') }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('can_supplier')
+                    <li>
+                        <a href="#sidebarSupplier" data-bs-toggle="collapse">
+                            <i class="mdi mdi-truck-fast"></i>
+                            <span> {{ __('suppliers') }} </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarSupplier">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('add.supplier') }}">{{ __('add-supplier') }}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('all.supplier') }}">{{ __('list-suppliers') }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
-                <li>
-                    <a href="#purchases" data-bs-toggle="collapse">
-                        <i class="mdi mdi-file-document"></i>
-                        <span> {{ __('purchases') }} </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="purchases">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('purchase.pos') }}"> {{ __('add-purchase') }} </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('all.purchase.order') }}"> {{ __('list-purchases') }} </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('can_purchase')
+                    <li>
+                        <a href="#purchases" data-bs-toggle="collapse">
+                            <i class="mdi mdi-file-document"></i>
+                            <span> {{ __('purchases') }} </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="purchases">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('purchase.pos') }}"> {{ __('add-purchase') }} </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('all.purchase.order') }}"> {{ __('list-purchases') }} </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
                 <!-- Módulo de ventas -->
-                <li class="menu-title mt-2">{{ __('sales') }}</li>
+                @canany(['can_sale', 'can_customer'])
+                    <li class="menu-title mt-2">{{ __('sales') }}</li>
+                @endcanany
 
-                <li>
-                    <a href="#sidebarCrm" data-bs-toggle="collapse">
-                        <i class="mdi mdi-account-multiple-outline"></i>
-                        <span> {{ __('customers') }} </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarCrm">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('add.customer') }}">{{ __('add-customer') }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('all.customer') }}">{{ __('list-customers') }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @can('can_customer')
+                    <li>
+                        <a href="#sidebarCrm" data-bs-toggle="collapse">
+                            <i class="mdi mdi-account-multiple-outline"></i>
+                            <span> {{ __('customers') }} </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarCrm">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('add.customer') }}">{{ __('add-customer') }}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('all.customer') }}">{{ __('list-customers') }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
-                <li>
-                    <a href="{{ route('all.order') }}">
-                        <i class="mdi mdi-file-document"></i>
-                        <span>{{ __('list-sales') }}</span>
-                    </a>
-                </li>
+                @can('can_sale')
+                    <li>
+                        <a href="{{ route('all.order') }}">
+                            <i class="mdi mdi-file-document"></i>
+                            <span>{{ __('list-sales') }}</span>
+                        </a>
+                    </li>
+                @endcan
 
                 <!-- Módulo de reportes -->
-                <li class="menu-title mt-2">{{ __('reports') }}</li>
+                @can('can_report')
+                    <li class="menu-title mt-2">{{ __('reports') }}</li>
 
-                <li>
-                    <a href="{{ route('report.difference') }}">
-                        <i class="mdi mdi-ab-testing"></i>
-                        <span>{{ __('difference') }}</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{ route('report.difference') }}">
+                            <i class="mdi mdi-ab-testing"></i>
+                            <span>{{ __('difference') }}</span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>

@@ -30,6 +30,7 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __('id') }}</th>
+                                        <th>{{ __('username') }}</th>
                                         <th>{{ __('name') }}</th>
                                         <th>{{ __('actions') }}</th>
                                     </tr>
@@ -39,6 +40,7 @@
                                     @foreach ($users as $key => $user)
                                         <tr>
                                             <td>{{ $user->id }}</td>
+                                            <td>{{ $user->username }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>
                                                 <a href="{{ route('edit.user', $user->id) }}"

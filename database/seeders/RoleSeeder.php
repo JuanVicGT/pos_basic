@@ -30,7 +30,7 @@ class RoleSeeder extends Seeder
      */
     private function getAllModels(): array
     {
-        return ['category', 'customer', 'employee', 'expense', 'pos', 'ppos', 'sale', 'purchase', 'assistance', 'paysalary', 'product', 'supplier'];
+        return ['category', 'customer', 'employee', 'expense', 'pos', 'ppos', 'sale', 'purchase', 'assistance', 'paysalary', 'product', 'supplier', 'report'];
     }
 
     private function createPermissions()
@@ -48,7 +48,7 @@ class RoleSeeder extends Seeder
         // El Admin tendra acceso total
         return [
             'caja' => [
-                'pos', 'ppos'
+                'pos', 'sale'
             ],
             'encargado' => [
                 'sale', 'purchase', 'expense', 'customer', 'supplier', 'assistance', 'product'

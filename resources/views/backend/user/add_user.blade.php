@@ -82,7 +82,7 @@
                                                 <option value="encargado" @selected(old('role') === 'encargado')>
                                                     Encargado</option>
                                                 <option value="gerente" @selected(old('role') === 'gerente')>
-                                                    Genrente</option>
+                                                    Gerente</option>
                                             </select>
                                         </div>
 
