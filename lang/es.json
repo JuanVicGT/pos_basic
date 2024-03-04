@@ -98,6 +98,7 @@
     "name-printer": "Nombre de Impresora",
     "Name Printer": "Nombre de Impresora",
     "edit": "Editar",
+    "delete": "Eliminar",
     "id": "ID",
     "users": "Usuarios",
     "list-users": "Lista de usuarios",
@@ -109,5 +110,17 @@
     "phone": "Teléfono",
     "email": "Correo",
     "personal-info": "Información de perfil",
-    "username": "Usuario de inicion de sesión"
+    "username": "Usuario de inicion de sesión",
+    "January": "Enero",
+    "February": "Febrero",
+    "March": "Marzo",
+    "April": "Abril",
+    "May": "Mayo",
+    "June": "Junio",
+    "July": "Julio",
+    "August": "Agosto",
+    "September": "Septiembre",
+    "October": "Octubre",
+    "November": "Noviembre",
+    "December": "Diciembre"
 }

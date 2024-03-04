@@ -20,10 +20,11 @@ class SalaryController extends Controller
 
     public function AdvanceSalaryStore(Request $request)
     {
-
-        $validateData = $request->validate([
+        $request->validate([
+            'employee_id' => 'required',
             'month' => 'required',
             'year' => 'required',
+            'advance_salary' => 'required'
         ]);
 
         $month = $request->month;
@@ -32,7 +33,6 @@ class SalaryController extends Controller
         $advanced = AdvanceSalary::where('month', $month)->where('employee_id', $employee_id)->first();
 
         if ($advanced === NULL) {
-
             AdvanceSalary::insert([
                 'employee_id' => $request->employee_id,
                 'month' => $request->month,
@@ -60,7 +60,6 @@ class SalaryController extends Controller
 
     public function AllAdvanceSalary()
     {
-
         $salary = AdvanceSalary::latest()->get();
         return view('backend.salary.all_advance_salary', compact('salary'));
     } // End Method
@@ -96,19 +95,19 @@ class SalaryController extends Controller
     /////////////////////////////////////////////PAGAR SALARIOS///////////////////////////////////////////////////
     public function PaySalary()
     {
-
         $employee = Employee::latest()->get();
         return view('backend.salary.pay_salary', compact('employee'));
     } // End Method 
 
-    public function PayNowSalary($id){
+    public function PayNowSalary($id)
+    {
 
         $paysalary = Employee::findOrFail($id);
-        return view('backend.salary.paid_salary',compact('paysalary'));
+        return view('backend.salary.paid_salary', compact('paysalary'));
+    } // End Method
 
-    }// End Method
-
-    public function EmployeSalaryStore(Request $request){
+    public function EmployeSalaryStore(Request $request)
+    {
 
         $employee_id = $request->id;
 
@@ -123,21 +122,19 @@ class SalaryController extends Controller
 
         ]);
 
-       $notification = array(
+        $notification = array(
             'message' => 'Employee Salary Paid Successfully',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('pay.salary')->with($notification); 
+        return redirect()->route('pay.salary')->with($notification);
+    } // End Method 
 
-
-    }// End Method 
-
-    public function MonthSalary(){
+    public function MonthSalary()
+    {
 
         $paidsalary = PaySalary::latest()->get();
-        return view('backend.salary.month_salary',compact('paidsalary'));
-
-    }// End Method
+        return view('backend.salary.month_salary', compact('paidsalary'));
+    } // End Method
 
 }
