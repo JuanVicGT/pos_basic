@@ -27,7 +27,8 @@
                     <div class="card">
                         <div class="card-body">
                             @if (Session::has('message'))
-                                <div class="text-white alert alert-{{ Session::get('alert-type') }}">
+                                <div
+                                    class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
                                     {{ Session::get('message') }}
                                 </div>
                             @endif

@@ -31,6 +31,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if (Session::has('message'))
+                                <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
+                                    {{ Session::get('message') }}
+                                </div>
+                            @endif
                             <h4 class="header-title">{{ date('F Y') }}</h4>
 
                             <table id="basic-datatable" class="table dt-responsive nowrap w-100">

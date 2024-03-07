@@ -25,6 +25,11 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
+                        @if (Session::has('message'))
+                            <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
 
                         <!-- end timeline content-->
                         <div class="tab-pane" id="settings">

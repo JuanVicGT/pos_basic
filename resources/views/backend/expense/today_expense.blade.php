@@ -31,6 +31,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        @if (Session::has('message'))
+                            <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
 
                         <h4 class="header-title"> Gastos de hoy</h4>
                         <h4 style="color:white; font-size: 30px;" align="center"> Total : Q. {{ $expense }}</h4>

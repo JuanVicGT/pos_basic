@@ -22,6 +22,12 @@
                 <div class="col-lg-6 col-xl-6">
                     <div class="card text-center">
                         <div class="card-body">
+                            @if (Session::has('message'))
+                                <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
+                                    {{ Session::get('message') }}
+                                </div>
+                            @endif
+
                             <div class="table-responsive">
                                 <table class="table table-bordered border-primary mb-0">
                                     <thead>

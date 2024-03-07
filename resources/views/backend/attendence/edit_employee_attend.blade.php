@@ -50,6 +50,12 @@
                 <div class="card">
 
                     <div class="card-body">
+                        @if (Session::has('message'))
+                            <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
+
                         <form action="{{ route('employee.attend.store') }}" method="post" id="myForm">
                             @csrf
                             <div class="form-group col-md-4">
