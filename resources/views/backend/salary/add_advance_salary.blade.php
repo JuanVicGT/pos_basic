@@ -38,6 +38,11 @@
                 <div class="col-lg-8 col-xl-12">
                     <div class="card">
                         <div class="card-body">
+                            @if (Session::has('message'))
+                                <div class="text-white alert alert-{{ Session::get('alert-type') }}">
+                                    {{ Session::get('message') }}
+                                </div>
+                            @endif
 
                             <!-- end timeline content-->
                             <div class="tab-pane" id="settings">
@@ -111,8 +116,9 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="firstname" class="form-label">Adelanto de salario</label>
+                                                <label for="advance_salary" class="form-label">Adelanto de salario</label>
                                                 <input type="number" step="0.01" name="advance_salary"
+                                                    value="{{ old('advance_salary', 0) }}"
                                                     class="form-control @error('advance_salary') is-invalid @enderror">
                                                 @error('advance_salary')
                                                     <span class="text-danger"> {{ $message }} </span>
