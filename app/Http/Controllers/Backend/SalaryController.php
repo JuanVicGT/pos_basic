@@ -27,35 +27,48 @@ class SalaryController extends Controller
             'advance_salary' => 'required'
         ]);
 
-        $month = $request->month;
-        $employee_id = $request->employee_id;
+        // No se pueden dar adelantos de fechas pasadas
+        $currentMonth = date('F');
+        $currentYear = date('Y');
 
-        $advanced = AdvanceSalary::where('month', $month)->where('employee_id', $employee_id)->first();
-
-        if ($advanced === NULL) {
-            AdvanceSalary::insert([
-                'employee_id' => $request->employee_id,
-                'month' => $request->month,
-                'year' => $request->year,
-                'advance_salary' => $request->advance_salary,
-                'created_at' => Carbon::now(),
-            ]);
-
+        if ((string) $request->year === (string) $currentYear && $this->getNumMonth((string) $request->month) < $this->getNumMonth($currentMonth)) {
             $notification = array(
-                'message' => 'Advance Salary Paid Successfully',
-                'alert-type' => 'success'
-            );
-
-            return redirect()->route('all.advance.salary')->with($notification);
-        } else {
-
-            $notification = array(
-                'message' => 'Advance Already Paid',
+                'message' => __('date-not-valid'),
                 'alert-type' => 'warning'
             );
 
             return redirect()->back()->with($notification);
         }
+
+        $employee = Employee::find($request->employee_id);
+        $advanced = AdvanceSalary::where('year', $request->year)
+            ->where('month', $request->month)
+            ->where('employee_id', $employee->id)->first();
+
+        // Solo se permite un único adelanto de salario
+        if (!empty($advanced->id)) {
+            $notification = array(
+                'message' => $currentYear . ' - ' . $request->year,
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
+        AdvanceSalary::insert([
+            'employee_id' => $request->employee_id,
+            'month' => $request->month,
+            'year' => $request->year,
+            'advance_salary' => $request->advance_salary,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => __('Advance Salary Paid Successfully'),
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.advance.salary')->with($notification);
     } // End Method 
 
     public function AllAdvanceSalary()
@@ -137,4 +150,36 @@ class SalaryController extends Controller
         return view('backend.salary.month_salary', compact('paidsalary'));
     } // End Method
 
+    private function getNumMonth(?string $month): int
+    {
+        switch ($month) {
+            case 'January':
+                return 1;
+            case 'February':
+                return 2;
+            case 'March':
+                return 3;
+            case 'April':
+                return 4;
+            case 'May':
+                return 5;
+            case 'June':
+                return 6;
+            case 'July':
+                return 7;
+            case 'August':
+                return 8;
+            case 'September':
+                return 9;
+            case 'October':
+                return 10;
+            case 'November':
+                return 11;
+            case 'December':
+                return 12;
+
+            default:
+                return 0;
+        }
+    }
 }
