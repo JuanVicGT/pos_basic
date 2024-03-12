@@ -100,11 +100,12 @@ Route::middleware(['auth'])->group(function () {
     /// Salarios adelantos rutas
     Route::controller(SalaryController::class)->group(function () {
         Route::get('/add/advance/salary', 'AddAdvanceSalary')->name('add.advance.salary');
-        Route::post('/advance/salary/store', 'AdvanceSalaryStore')->name('advance.salary.store');
         Route::get('/all/advance/salary', 'AllAdvanceSalary')->name('all.advance.salary');
-
         Route::get('/edit/advance/salary/{id}', 'EditAdvanceSalary')->name('edit.advance.salary');
+
+        Route::post('/advance/salary/store', 'AdvanceSalaryStore')->name('advance.salary.store');
         Route::post('/advance/salary/update', 'AdvanceSalaryUpdate')->name('advance.salary.update');
+        Route::get('/advance/salary/delete/{id}', 'AdvanceSalaryDelete')->name('delete.advance.salary');
     });
 
     /// Pago de salarios rutas

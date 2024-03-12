@@ -65,7 +65,7 @@
                                             <td>
                                                 <a href="{{ route('edit.advance.salary', $item->id) }}"
                                                     class="btn btn-blue rounded-pill waves-effect waves-light">Editar</a>
-                                                <a href="{{ route('delete.employee', $item->id) }}"
+                                                <a href="{{ route('delete.advance.salary', $item->id) }}"
                                                     class="btn btn-danger rounded-pill waves-effect waves-light"
                                                     id="delete">Eliminar</a>
 

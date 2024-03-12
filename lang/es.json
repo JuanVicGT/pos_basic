@@ -125,6 +125,8 @@
     "December": "Diciembre",
     "saved-successfully": "Guardado exitosamente",
     "deleted-successfully": "Eliminado exitosamente",
-    "edited-successfully": "Editado exitosamente",
-    "advance-already-paid": "Adelanto registrado con anterioridad"
+    "updated-successfully": "Actualizado exitosamente",
+    "date-not-valid": "Fecha no válida",
+    "advance-already-paid": "Adelanto registrado con anterioridad",
+    "cannot-delete-past-advanced": "No se pueden eliminar adelantos de meses anteriores"
 }

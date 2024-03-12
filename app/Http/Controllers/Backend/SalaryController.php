@@ -31,7 +31,7 @@ class SalaryController extends Controller
         $currentMonth = date('F');
         $currentYear = date('Y');
 
-        if ((string) $request->year === (string) $currentYear && $this->getNumMonth((string) $request->month) < $this->getNumMonth($currentMonth)) {
+        if ((int) $request->year === (int) $currentYear && $this->getNumMonth((string) $request->month) < $this->getNumMonth($currentMonth)) {
             $notification = array(
                 'message' => __('date-not-valid'),
                 'alert-type' => 'warning'
@@ -48,7 +48,7 @@ class SalaryController extends Controller
         // Solo se permite un único adelanto de salario
         if (!empty($advanced->id)) {
             $notification = array(
-                'message' => $currentYear . ' - ' . $request->year,
+                'message' => __('advance-already-paid'),
                 'alert-type' => 'warning'
             );
 
@@ -64,11 +64,47 @@ class SalaryController extends Controller
         ]);
 
         $notification = array(
-            'message' => __('Advance Salary Paid Successfully'),
+            'message' => __('saved-successfully'),
             'alert-type' => 'success'
         );
 
         return redirect()->route('all.advance.salary')->with($notification);
+    } // End Method 
+
+    public function AdvanceSalaryDelete($id)
+    {
+        $advancedSalary = AdvanceSalary::findOrFail($id);
+
+        // No se pueden dar adelantos de fechas pasadas
+        $currentMonth = date('F');
+        $currentYear = date('Y');
+
+        if ((int) $currentYear < (int) $advancedSalary->year) {
+            $notification = array(
+                'message' => __('cannot-delete-past-advanced'),
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
+        if ((int) $advancedSalary->year === (int) $currentYear && $this->getNumMonth((string) $advancedSalary->month) < $this->getNumMonth($currentMonth)) {
+            $notification = array(
+                'message' => __('cannot-delete-past-advanced'),
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
+        $advancedSalary->delete();
+
+        $notification = array(
+            'message' => __('deleted-successfully'),
+            'alert-type' => 'success'
+        );
+        
+        return redirect()->back()->with($notification);
     } // End Method 
 
     public function AllAdvanceSalary()
@@ -98,7 +134,7 @@ class SalaryController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Advance Salary Updated Successfully',
+            'message' => __('updated-successfully'),
             'alert-type' => 'success'
         );
 
