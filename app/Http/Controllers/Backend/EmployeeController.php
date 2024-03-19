@@ -57,7 +57,7 @@ class EmployeeController extends Controller
             'created_at' => Carbon::now(),
         ]);
         $notification = array(
-            'message' => 'Employee Inserted Successfully',
+            'message' => __('Employee Inserted Successfully'),
             'alert-type' => 'success'
         );
         return redirect()->route('all.employee')->with($notification);
@@ -90,7 +90,7 @@ class EmployeeController extends Controller
                 'created_at' => Carbon::now(),
             ]);
             $notification = array(
-                'message' => 'Employee Updated Successfully',
+                'message' => __('Employee Updated Successfully'),
                 'alert-type' => 'success'
             );
             return redirect()->route('all.employee')->with($notification);
@@ -107,7 +107,7 @@ class EmployeeController extends Controller
                 'created_at' => Carbon::now(),
             ]);
             $notification = array(
-                'message' => 'Employee Updated Successfully',
+                'message' => __('Employee Updated Successfully'),
                 'alert-type' => 'success'
             );
             return redirect()->route('all.employee')->with($notification);
@@ -124,7 +124,7 @@ class EmployeeController extends Controller
         Employee::findOrFail($id)->delete();
 
         $notification = array(
-            'message' => 'Employee Deleted Successfully',
+            'message' => __('Employee Deleted Successfully'),
             'alert-type' => 'success'
         );
 

@@ -131,5 +131,8 @@
     "cannot-delete-past-advanced": "No se pueden eliminar adelantos de meses anteriores",
     "Expense Inserted Successfully": "Gasto registrado exitosamente",
     "Expense Updated Successfully": "Gasto actualizado exitosamente",
-    "Year not valid": "Año no válido"
+    "Year not valid": "Año no válido",
+    "Employee Inserted Successfully": "Empleado registrado exitosamente",
+    "Employee Updated Successfully": "Empleado actualizado exitosamente",
+    "Employee Deleted Successfully": "Empleado eliminado exitosamente"
 }
