@@ -28,10 +28,10 @@
 
             <!-- start page notifications -->
             @if (Session::has('message'))
-                <div class="d-flex justify-content-between {{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type', 'warning') }} fade show"
+                <div class="d-flex justify-content-between fade show alert alert-{{ Session::get('alert-type', 'warning') }} {{ Session::get('text-color', 'text-white') }}"
                     role="alert">
-                    {{ Session::get('message') }}
-                    <span id="close-alert" class="btn text-white border-0">x</span>
+                    <span class="h-full align-middle">{{ Session::get('message') }}</span>
+                    <a href="#" id="close-alert" class="text-white border-0">x</a>
                 </div>
             @endif
             <!-- end page notifications -->
@@ -39,7 +39,8 @@
             <div class="row mb-2">
                 <div class="col-12">
                     <form action="{{ route('year.expense', 2020) }}" method="get">
-                        <input class="only-year-date form-control" id="year" name="year" type="number" value="{{ $year }}">
+                        <input class="only-year-date form-control" id="year" name="year" type="number"
+                            value="{{ $year }}">
                         <button type="submit" class="btn btn-success waves-effect waves-light mt-2">Filtrar</button>
                     </form>
                 </div>

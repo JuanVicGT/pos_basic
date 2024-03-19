@@ -22,11 +22,15 @@
             </div>
             <!-- end page title -->
 
+            <!-- start page notifications -->
             @if (Session::has('message'))
-                <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
-                    {{ Session::get('message') }}
+                <div class="d-flex justify-content-between fade show alert alert-{{ Session::get('alert-type', 'warning') }} {{ Session::get('text-color', 'text-white') }}"
+                    role="alert">
+                    <span class="h-full align-middle">{{ Session::get('message') }}</span>
+                    <a href="#" id="close-alert" class="text-white border-0">x</a>
                 </div>
             @endif
+            <!-- end page notifications -->
 
             <div class="row">
                 <div class="col-12">
