@@ -1,6 +1,3 @@
-<p align="center"><a href="https://leantime.posenlinea.net" target="_blank"><img src="./logo_grupo_7_proyecto.webp" width="400" alt="Grupo Logo"></a></p>
-
-
 # Descripción de proyecto
 El proyecto se basa en realizar un punto de venta (POS point of sale).
 
