@@ -154,6 +154,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/expense', 'UpdateExpense')->name('expense.update');
         Route::get('/month/expense', 'MonthExpense')->name('month.expense');
         Route::get('/year/expense/{year?}', 'YearExpense')->name('year.expense');
+        Route::post('/year/filter/expense', 'FilterYearExpense')->name('filter.year.expense');
     });
 
     ///POS rutas 

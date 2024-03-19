@@ -36,13 +36,26 @@
             @endif
             <!-- end page notifications -->
 
-            <div class="row mb-2">
+            <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('year.expense', 2020) }}" method="get">
-                        <input class="only-year-date form-control" id="year" name="year" type="number"
-                            value="{{ $year }}">
-                        <button type="submit" class="btn btn-success waves-effect waves-light mt-2">Filtrar</button>
-                    </form>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('filter.year.expense') }}">
+                                @csrf
+
+                                <div class="form-group">
+                                    <label for="year" class="form-label">{{ __('year') }}</label>
+                                    <input class="only-year-date form-control" id="year" name="year" type="number"
+                                        value="{{ $year }}">
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="submit"
+                                        class="btn btn-success waves-effect waves-light mt-2">Filtrar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -51,7 +64,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title"> Gastos anuales </h4>
-                            <h4 style="color:white; font-size: 30px;" align="center"> Total : Q.{{ $expenseyear }}</h4>
+                            <h4 style="color:white; font-size: 30px;" align="center"> Total : Q {{ number_format($expenseyear, 2, '.', ',') }}</h4>
                             <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
@@ -67,7 +80,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item->details }}</td>
-                                            <td>{{ $item->amount }}</td>
+                                            <td>Q {{ number_format($item->amount, 2, '.', ',') }}</td>
                                             <td>{{ $item->year }}</td>
                                         </tr>
                                     @endforeach

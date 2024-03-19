@@ -76,48 +76,32 @@ class ExpenseController extends Controller
         return view('backend.expense.month_expense', compact('monthexpense'));
     } // End Method
 
+    public function FilterYearExpense(Request $request)
+    {
+        $request->validate([
+            'year' => ['required', 'integer']
+        ]);
+
+        return redirect()->route('year.expense', $request->year);
+    }
+
     public function YearExpense(?string $year = null)
     {
+        $digitRegex = "/^\\d+$/";
         $currentYear = date("Y");
-        $yearexpense = [];
-
-        $notification = array(
-            'message' => __('Year not valid'),
-            'alert-type' => 'error'
-        );
-        $year = $currentYear;
-        return view('backend.expense.year_expense', compact('yearexpense', 'year'))->with($notification);
 
         if (empty($year))
             $year = $currentYear;
 
-        if (!is_int($year)) {
+        if (!preg_match($digitRegex, $year)) {
             $notification = array(
-                'message' => __('Year not valid'),
-                'alert-type' => 'error'
+                'message' => __('Year :year not valid', ['year' => $year]),
+                'alert-type' => 'danger'
             );
-            $year = $currentYear;
-            $yearexpense = Expense::where('year', $year)->get();
-            return view('backend.expense.year_expense', compact('yearexpense', 'year'))->with($notification);
+            return redirect()->route('year.expense')->with($notification);
         }
 
-        if (!checkdate(1, 1, $year)) {
-            $notification = array(
-                'message' => __('Year not valid'),
-                'alert-type' => 'error'
-            );
-            $year = $currentYear;
-            $yearexpense = Expense::where('year', $year)->get();
-            return view('backend.expense.year_expense', compact('yearexpense', 'year'))->with($notification);
-        }
-
-        $notification = array(
-            'message' => __('Year not valid'),
-            'alert-type' => 'error'
-        );
-
-        $year = (int) $year;
         $yearexpense = Expense::where('year', $year)->get();
-        return view('backend.expense.year_expense', compact('yearexpense', 'year'))->with($notification);
+        return view('backend.expense.year_expense', compact('yearexpense', 'year'));
     } // End Method
 }
