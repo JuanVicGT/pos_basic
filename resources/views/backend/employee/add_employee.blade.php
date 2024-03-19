@@ -23,17 +23,21 @@
             </div>
             <!-- end page title -->
 
-            <div class="row">
+            <!-- start page notifications -->
+            @if (Session::has('message'))
+                <div class="d-flex justify-content-between {{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type', 'warning') }} fade show"
+                    role="alert">
+                    {{ Session::get('message') }}
+                    <span id="close-alert" class="btn text-white border-0">x</span>
+                </div>
+            @endif
+            <!-- end page notifications -->
 
+            <div class="row">
 
                 <div class="col-lg-8 col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            @if (Session::has('message'))
-                                <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
-                                    {{ Session::get('message') }}
-                                </div>
-                            @endif
 
                             <!-- end timeline content-->
                             <div class="tab-pane" id="settings">

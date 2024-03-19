@@ -21,15 +21,20 @@
             </div>
             <!-- end page title -->
 
+            <!-- start page notifications -->
+            @if (Session::has('message'))
+                <div class="d-flex justify-content-between {{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type', 'warning') }} fade show"
+                    role="alert">
+                    {{ Session::get('message') }}
+                    <span id="close-alert" class="btn text-white border-0">x</span>
+                </div>
+            @endif
+            <!-- end page notifications -->
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            @if (Session::has('message'))
-                                <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
-                                    {{ Session::get('message') }}
-                                </div>
-                            @endif
 
                             <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                                 <thead>
@@ -51,7 +56,7 @@
                                                 <a href="{{ route('purchase.view', $item->id) }}"
                                                     class="btn btn-blue rounded-pill waves-effect waves-light">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
-                                                        {{ __('see') }} </a>
+                                                    {{ __('see') }} </a>
                                             </td>
                                         </tr>
                                     @endforeach

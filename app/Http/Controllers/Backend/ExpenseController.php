@@ -11,13 +11,11 @@ class ExpenseController extends Controller
 {
     public function AddExpense()
     {
-
         return view('backend.expense.add_expense');
     } // End Method
 
     public function StoreExpense(Request $request)
     {
-
         Expense::insert([
 
             'details' => $request->details,
@@ -28,9 +26,8 @@ class ExpenseController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-
         $notification = array(
-            'message' => 'Expense Inserted Successfully',
+            'message' => __('Expense Inserted Successfully'),
             'alert-type' => 'success'
         );
 
@@ -39,7 +36,6 @@ class ExpenseController extends Controller
 
     public function TodayExpense()
     {
-
         $date = date("d-m-Y");
         $today = Expense::where('date', $date)->get();
         return view('backend.expense.today_expense', compact('today'));
@@ -47,7 +43,6 @@ class ExpenseController extends Controller
 
     public function EditExpense($id)
     {
-
         $expense = Expense::findOrFail($id);
         return view('backend.expense.edit_expense', compact('expense'));
     } // End Method 
@@ -55,11 +50,9 @@ class ExpenseController extends Controller
 
     public function UpdateExpense(Request $request)
     {
-
         $expense_id = $request->id;
 
         Expense::findOrFail($expense_id)->update([
-
             'details' => $request->details,
             'amount' => $request->amount,
             'month' => $request->month,
@@ -68,30 +61,63 @@ class ExpenseController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-
         $notification = array(
-            'message' => 'Expense Updated Successfully',
+            'message' => __('Expense Updated Successfully'),
             'alert-type' => 'success'
         );
 
         return redirect()->route('today.expense')->with($notification);
     } // End Method
 
-    public function MonthExpense(){
-
+    public function MonthExpense()
+    {
         $month = date("F");
-        $monthexpense = Expense::where('month',$month)->get();
-        return view('backend.expense.month_expense',compact('monthexpense'));
+        $monthexpense = Expense::where('month', $month)->get();
+        return view('backend.expense.month_expense', compact('monthexpense'));
+    } // End Method
 
-    }// End Method
+    public function YearExpense(?string $year = null)
+    {
+        $currentYear = date("Y");
+        $yearexpense = [];
 
+        $notification = array(
+            'message' => __('Year not valid'),
+            'alert-type' => 'error'
+        );
+        $year = $currentYear;
+        return view('backend.expense.year_expense', compact('yearexpense', 'year'))->with($notification);
 
-    public function YearExpense(){
+        if (empty($year))
+            $year = $currentYear;
 
-         $year = date("Y");
-        $yearexpense = Expense::where('year',$year)->get();
-        return view('backend.expense.year_expense',compact('yearexpense'));
+        if (!is_int($year)) {
+            $notification = array(
+                'message' => __('Year not valid'),
+                'alert-type' => 'error'
+            );
+            $year = $currentYear;
+            $yearexpense = Expense::where('year', $year)->get();
+            return view('backend.expense.year_expense', compact('yearexpense', 'year'))->with($notification);
+        }
 
-    }// End Method
+        if (!checkdate(1, 1, $year)) {
+            $notification = array(
+                'message' => __('Year not valid'),
+                'alert-type' => 'error'
+            );
+            $year = $currentYear;
+            $yearexpense = Expense::where('year', $year)->get();
+            return view('backend.expense.year_expense', compact('yearexpense', 'year'))->with($notification);
+        }
 
+        $notification = array(
+            'message' => __('Year not valid'),
+            'alert-type' => 'error'
+        );
+
+        $year = (int) $year;
+        $yearexpense = Expense::where('year', $year)->get();
+        return view('backend.expense.year_expense', compact('yearexpense', 'year'))->with($notification);
+    } // End Method
 }

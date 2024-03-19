@@ -22,18 +22,21 @@
             </div>
             <!-- end page title -->
 
-            <div class="row">
+            <!-- start page notifications -->
+            @if (Session::has('message'))
+                <div class="d-flex justify-content-between {{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type', 'warning') }} fade show"
+                    role="alert">
+                    {{ Session::get('message') }}
+                    <span id="close-alert" class="btn text-white border-0">x</span>
+                </div>
+            @endif
+            <!-- end page notifications -->
 
+            <div class="row">
 
                 <div class="col-lg-8 col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            @if (Session::has('message'))
-                                <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
-                                    {{ Session::get('message') }}
-                                </div>
-                            @endif
-
                             <!-- end timeline content-->
 
                             <div class="tab-pane" id="settings">
@@ -49,7 +52,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Nombre*</label>
                                                 <x-text-input type="text" name="name" :value="old('name')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('name')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -60,7 +63,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Email*</label>
                                                 <x-text-input type="email" name="email" :value="old('email')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('email')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -71,7 +74,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Teléfono*</label>
                                                 <x-text-input type="text" name="phone" :value="old('phone')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('phone')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -82,7 +85,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Dirección*</label>
                                                 <x-text-input type="text" name="address" :value="old('address')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('address')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -93,7 +96,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Tienda*</label>
                                                 <x-text-input type="text" name="shopname" :value="old('shopname')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('shopname')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -104,7 +107,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Nombre de cuenta*</label>
                                                 <x-text-input type="text" name="account_holder" :value="old('account_holder')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('account_holder')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -115,7 +118,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Número de cuenta*</label>
                                                 <x-text-input type="text" name="account_number" :value="old('account_number')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('account_number')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -126,7 +129,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Nombre de Banco*</label>
                                                 <x-text-input type="text" name="bank_name" :value="old('bank_name')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('bank_name')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -137,7 +140,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Sucursal*</label>
                                                 <x-text-input type="text" name="bank_branch" :value="old('bank_branch')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('bank_branch')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -148,7 +151,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Ciudad*</label>
                                                 <x-text-input type="text" name="city" :value="old('city')"
-                                                    class="form-control"/>
+                                                    class="form-control" />
                                                 @error('city')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror

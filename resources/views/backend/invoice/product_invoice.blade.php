@@ -21,12 +21,23 @@
             </div>
             <!-- end page title -->
 
+            <!-- start page notifications -->
+            @if (Session::has('message'))
+                <div class="d-flex justify-content-between {{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type', 'warning') }} fade show"
+                    role="alert">
+                    {{ Session::get('message') }}
+                    <span id="close-alert" class="btn text-white border-0">x</span>
+                </div>
+            @endif
+            <!-- end page notifications -->
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             @if (Session::has('message'))
-                                <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
+                                <div
+                                    class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
                                     {{ Session::get('message') }}
                                 </div>
                             @endif
@@ -161,9 +172,11 @@
                         <input type="hidden" name="invoice_no" value="{{ $order->invoice_no }}">
 
                         <input type="hidden" name="total_products" value="{{ (int) Cart::count() }}">
-                        <input type="hidden" name="sub_total" value="{{ number_format((float) Cart::subtotal(6, '.', ''), 6) }}">
+                        <input type="hidden" name="sub_total"
+                            value="{{ number_format((float) Cart::subtotal(6, '.', ''), 6) }}">
                         <input type="hidden" name="tax" value="{{ number_format((float) Cart::tax(6, '.', ''), 6) }}">
-                        <input type="hidden" name="total" value="{{ number_format((float) Cart::total(6, '.', ''), 6) }}">
+                        <input type="hidden" name="total"
+                            value="{{ number_format((float) Cart::total(6, '.', ''), 6) }}">
 
                         <div class="mb-3 text-center">
                             <button class="btn btn-primary" type="submit">{{ __('complete') }}</button>

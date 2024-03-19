@@ -1,4 +1,13 @@
 $(function () {
+    $('.only-year-date').datepicker({
+        minViewMode: 2,
+        format: 'yyyy'
+    });
+
+    $(document).on('click', '#close-alert', function (e) {
+        $(".alert").alert('close')
+    })
+
     $(document).on('click', '#delete', function (e) {
         e.preventDefault();
         var link = $(this).attr("href");

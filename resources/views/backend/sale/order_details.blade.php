@@ -27,16 +27,21 @@
             </div>
             <!-- end page title -->
 
+            <!-- start page notifications -->
+            @if (Session::has('message'))
+                <div class="d-flex justify-content-between {{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type', 'warning') }} fade show"
+                    role="alert">
+                    {{ Session::get('message') }}
+                    <span id="close-alert" class="btn text-white border-0">x</span>
+                </div>
+            @endif
+            <!-- end page notifications -->
+
             <div class="row">
 
                 <div class="col-lg-12 col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            @if (Session::has('message'))
-                                <div class="{{ Session::get('text-color', 'text-white') }} alert alert-{{ Session::get('alert-type') }}">
-                                    {{ Session::get('message') }}
-                                </div>
-                            @endif
 
                             <!-- end timeline content-->
 
@@ -75,7 +80,8 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">{{ __('amount') }}</label>
-                                                <p class="text-success">Q {{ number_format($order->pay, 2, '.', ',') }} </p>
+                                                <p class="text-success">Q {{ number_format($order->pay, 2, '.', ',') }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div> <!-- end row -->

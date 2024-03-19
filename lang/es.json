@@ -128,5 +128,8 @@
     "updated-successfully": "Actualizado exitosamente",
     "date-not-valid": "Fecha no válida",
     "advance-already-paid": "Adelanto registrado con anterioridad",
-    "cannot-delete-past-advanced": "No se pueden eliminar adelantos de meses anteriores"
+    "cannot-delete-past-advanced": "No se pueden eliminar adelantos de meses anteriores",
+    "Expense Inserted Successfully": "Gasto registrado exitosamente",
+    "Expense Updated Successfully": "Gasto actualizado exitosamente",
+    "Year not valid": "Año no válido"
 }
