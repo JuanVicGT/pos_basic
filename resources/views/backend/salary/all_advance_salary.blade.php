@@ -57,13 +57,13 @@
                                             <td> <img src="{{ asset($item->employee->image) }}"
                                                     style="width:50px; height: 40px;"> </td>
                                             <td>{{ $item['employee']['name'] }}</td>
-                                            <td>{{ $item->month }}</td>
-                                            <td>{{ $item['employee']['salary'] }}</td>
+                                            <td>{{ __($item->month) }}</td>
+                                            <td>Q {{ number_format($item['employee']['salary'], 2, '.', ',') }}</td>
                                             <td>
                                                 @if ($item->advance_salary == null)
-                                                    <p>No Advance</p>
+                                                    <p>{{ __('No Advance') }}</p>
                                                 @else
-                                                    {{ $item->advance_salary }}
+                                                    Q {{ number_format($item->advance_salary, 2, '.', ',') }}
                                                 @endif
                                             </td>
                                             <td>
