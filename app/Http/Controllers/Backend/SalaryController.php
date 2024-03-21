@@ -144,31 +144,27 @@ class SalaryController extends Controller
     /////////////////////////////////////////////PAGAR SALARIOS///////////////////////////////////////////////////
     public function PaySalary()
     {
-        $employee = Employee::latest()->get();
-        return view('backend.salary.pay_salary', compact('employee'));
+        $employees = Employee::latest()->get();
+        return view('backend.salary.pay_salary', compact('employees'));
     } // End Method 
 
     public function PayNowSalary($id)
     {
-
-        $paysalary = Employee::findOrFail($id);
-        return view('backend.salary.paid_salary', compact('paysalary'));
+        $employee = Employee::findOrFail($id);
+        return view('backend.salary.paid_salary', compact('employee'));
     } // End Method
 
     public function EmployeSalaryStore(Request $request)
     {
-
         $employee_id = $request->id;
 
         PaySalary::insert([
-
             'employee_id' => $employee_id,
             'salary_month' => $request->month,
             'paid_amount' => $request->paid_amount,
             'advance_salary' => $request->advance_salary,
             'due_salary' => $request->due_salary,
             'created_at' => Carbon::now(),
-
         ]);
 
         $notification = array(

@@ -41,7 +41,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">{{ date('F Y') }}</h4>
+                            <h4 class="header-title">{{ __(date('F')) . ' ' . date('Y') }}</h4>
 
                             <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                                 <thead>
@@ -58,30 +58,34 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($employee as $key => $item)
+                                    @foreach ($employees as $key => $employee)
+                                        @php
+                                            $employee->month = date('F', strtotime('+1 month'));
+
+                                            foreach ($employee->advanceByMonth as $advance) {
+                                                $advanceSalary += $advance->advance_salary;
+                                            }
+
+                                            $amount = $employee->salary - $advanceSalary;
+                                        @endphp
+
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td> <img src="{{ asset($item->image) }}" style="width:50px; height: 40px;">
+                                            <td> <img src="{{ asset($employee->image) }}" style="width:50px; height: 40px;">
                                             </td>
-                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $employee->name }}</td>
                                             <td><span class="badge bg-primary"> {{ __(date('F', strtotime('+1 month'))) }}
                                                 </span> </td>
-                                            <td> {{ $item->salary }} </td>
-                                            {{ $item->month = date('F', strtotime('+1 month')) }}
-                                            @foreach ($item->advanceByMonth as $advance)
-                                                {{ $advanceSalary += $advance->advance_salary }};
-                                            @endforeach
+                                            <td>Q {{ number_format($employee->salary, 2, '.', ',') }} </td>
                                             <td>
-                                                Q {{ $advanceSalary }}
+                                                Q {{ number_format($advanceSalary, 2, '.', ',') }}
                                             </td>
                                             <td>
-                                                @php
-                                                    $amount = $item->salary - $advanceSalary;
-                                                @endphp
-                                                <strong style="color: #fff;"> Q {{ round($amount, 4) }} </strong>
+                                                <strong style="color: #fff;"> Q {{ number_format($amount, 2, '.', ',') }}
+                                                </strong>
                                             </td>
                                             <td>
-                                                <a href="{{ route('pay.now.salary', $item->id) }}"
+                                                <a href="{{ route('pay.now.salary', $employee->id) }}"
                                                     class="btn btn-blue rounded-pill waves-effect waves-light">Pagar
                                                     ahora</a>
                                             </td>

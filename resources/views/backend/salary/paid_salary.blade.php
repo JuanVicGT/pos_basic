@@ -43,57 +43,59 @@
                             <div class="tab-pane" id="settings">
                                 <form method="post" action="{{ route('employe.salary.store') }}">
                                     @csrf
-                                    <input type="hidden" name="id" value="{{ $paysalary->id }}">
+                                    <input type="hidden" name="id" value="{{ $employee->id }}">
                                     <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Pagar</h5>
 
                                     <div class="row">
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="firstname" class="form-label">Nombre empleado </label>
-                                                <strong style="color: #fff;">{{ $paysalary->name }}</strong>
+                                                <label for="firstname" class="form-label">Nombre empleado: </label>
+                                                <strong style="color: #fff;">{{ $employee->name }}</strong>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="firstname" class="form-label">Mes</label>
-                                                <strong style="color: #fff;">{{ date('F', strtotime('-1 month')) }}</strong>
-                                                <input type="hidden" name="month"
-                                                    value="{{ date('F', strtotime('-1 month')) }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="firstname" class="form-label">Salario</label>
-                                                <strong style="color: #fff;">{{ $paysalary->salary }}</strong>
-                                                <input type="hidden" name="paid_amount" value="{{ $paysalary->salary }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="firstname" class="form-label">Adelanto de salario</label>
+                                                <label for="firstname" class="form-label">Mes:</label>
                                                 <strong
-                                                    style="color: #fff;">{{ $paysalary['advance']['advance_salary'] }}</strong>
+                                                    style="color: #fff;">{{ __(date('F', strtotime('+1 month'))) }}</strong>
+                                                <input type="hidden" name="month"
+                                                    value="{{ date('F', strtotime('+1 month')) }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="firstname" class="form-label">Salario:</label>
+                                                <strong style="color: #fff;">Q
+                                                    {{ number_format($employee->salary, 2, '.', ',') }}</strong>
+                                                <input type="hidden" name="paid_amount" value="{{ $employee->salary }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="firstname" class="form-label">Adelanto de salario:</label>
+                                                <strong style="color: #fff;">Q
+                                                    {{ number_format($employee->advance->advance_salary, 2, '.', ',') }}</strong>
                                                 <input type="hidden" name="advance_salary"
-                                                    value="{{ $paysalary['advance']['advance_salary'] }}">
+                                                    value="{{ $employee->advance->advance_salary }}">
                                             </div>
                                         </div>
 
                                         @php
-                                            $amount = $paysalary->salary - $paysalary['advance']['advance_salary'];
+                                            $amount = $employee->salary - $employee->advance->advance_salary;
                                         @endphp
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="firstname" class="form-label">Total a pagar</label>
+                                                <label for="firstname" class="form-label">Total a pagar:</label>
                                                 <strong style="color: #fff;">
-                                                    @if ($paysalary['advance']['advance_salary'] == null)
+                                                    @if ($employee->advance->advance_salary == null)
                                                         <span>No Salary</span>
                                                     @else
-                                                        {{ round($amount) }}
+                                                        Q {{ number_format($amount, 2, '.', ',') }}
                                                     @endif
                                                 </strong>
                                                 <input type="hidden" name="due_salary" value="{{ round($amount) }}">
