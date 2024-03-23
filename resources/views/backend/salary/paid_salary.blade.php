@@ -14,7 +14,6 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Pagar salario</a></li>
-
                             </ol>
                         </div>
                         <h4 class="page-title">Pagar salario</h4>
@@ -105,7 +104,7 @@
 
                                     <div class="text-end">
                                         <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i
-                                                class="mdi mdi-content-save"></i> Pagar salario</button>
+                                                class="mdi mdi-content-save"></i>Pagar salario</button>
                                     </div>
                                 </form>
                             </div>
