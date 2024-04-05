@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('pay_salaries', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id');
-            $table->string('salary_month')->nullable();
+            $table->string('year')->nullable();
+            $table->string('month')->nullable();
 
-            $table->float('salary')->nullable();
-            $table->float('salary_amount')->nullable();
-            $table->float('paid_amount')->nullable();
             $table->float('advance_salary')->nullable();
+            $table->float('paid_amount')->nullable();
+            $table->float('salary')->nullable();
 
             $table->timestamps();
         });

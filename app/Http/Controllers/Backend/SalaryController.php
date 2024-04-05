@@ -159,10 +159,10 @@ class SalaryController extends Controller
 
         PaySalary::insert([
             'employee_id' => $employee_id,
-            'salary_month' => $request->month,
-            'paid_amount' => $request->paid_amount,
+            'month' => $request->month,
+            'salary' => $request->salary,
             'advance_salary' => $request->advance_salary,
-            'due_salary' => $request->due_salary,
+            'paid_amount' => $request->paid_amount,
             'created_at' => Carbon::now(),
         ]);
 
@@ -176,7 +176,6 @@ class SalaryController extends Controller
 
     public function MonthSalary()
     {
-
         $paidsalary = PaySalary::latest()->get();
         return view('backend.salary.month_salary', compact('paidsalary'));
     } // End Method
