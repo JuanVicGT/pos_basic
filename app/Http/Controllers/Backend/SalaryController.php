@@ -102,7 +102,7 @@ class SalaryController extends Controller
             'message' => __('deleted-successfully'),
             'alert-type' => 'success'
         );
-        
+
         return redirect()->back()->with($notification);
     } // End Method 
 
@@ -140,10 +140,17 @@ class SalaryController extends Controller
         return redirect()->route('all.advance.salary')->with($notification);
     } // End Method
 
-    /////////////////////////////////////////////PAGAR SALARIOS///////////////////////////////////////////////////
+    ///////////////////////////////////////////// PAGAR SALARIOS ///////////////////////////////////////////////////
     public function PaySalary()
     {
+        $month = date('F', strtotime('+1 month'));
+        $year = date('Y');
         $employees = Employee::latest()->get();
+
+        foreach ($employees as $key => $employee) {
+            $
+        }
+
         return view('backend.salary.pay_salary', compact('employees'));
     } // End Method 
 
