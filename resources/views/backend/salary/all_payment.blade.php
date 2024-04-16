@@ -15,7 +15,7 @@
                                     salario</a>
                             </ol>
                         </div>
-                        <h4 class="page-title">Ultimo mes pagado</h4>
+                        <h4 class="page-title">Pagos realizados</h4>
                     </div>
                 </div>
             </div>
@@ -43,26 +43,23 @@
                                         <th>Imagen</th>
                                         <th>Nombre</th>
                                         <th>Mes</th>
+                                        <th>Adelanto</th>
                                         <th>Salario</th>
                                         <th>Estado</th>
-                                        <th>Acción</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($paidsalary as $key => $item)
+                                    @foreach ($payments as $key => $pay)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td> <img src="{{ asset($item->employee->image) }}"
+                                            <td> <img src="{{ asset($pay->employee->image) }}"
                                                     style="width:50px; height: 40px;"> </td>
-                                            <td>{{ $item['employee']['name'] }}</td>
-                                            <td>{{ $item->salary_month }}</td>
-                                            <td>{{ $item['employee']['salary'] }}</td>
-                                            <td><span class="badge bg-success"> Full Paid </span> </td>
-                                            <td>
-                                                <a href="{{ route('edit.advance.salary', $item->id) }}"
-                                                    class="btn btn-blue rounded-pill waves-effect waves-light">Historial</a>
-                                            </td>
+                                            <td>{{ $pay['employee']['name'] }}</td>
+                                            <td>{{ __($pay->month) }}</td>
+                                            <td>{{ $pay['employee']['advance']['advance_salary'] ?? 0 }}</td>
+                                            <td>{{ $pay['employee']['salary'] }}</td>
+                                            <td><span class="badge bg-success fs-5 lh-base"> PAGADO </span> </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

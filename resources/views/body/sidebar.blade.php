@@ -78,7 +78,7 @@
                                     <a href="{{ route('pay.salary') }}">Pagar salarios</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('month.salary') }}">Ultimo mes pagado</a>
+                                    <a href="{{ route('month.salary') }}">Pagos realizados</a>
                                 </li>
                             </ul>
                         </div>

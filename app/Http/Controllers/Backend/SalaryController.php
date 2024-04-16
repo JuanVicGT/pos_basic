@@ -40,11 +40,26 @@ class SalaryController extends Controller
         }
 
         $employee = Employee::find($request->employee_id);
+
+        // No se permite realizar un adelanto a un salario ya pagado
+        $payment = PaySalary::where('year', $request->year)
+            ->where('month', $request->month)
+            ->where('employee_id', $employee->id)->first();
+
+        if (!empty($payment->id)) {
+            $notification = array(
+                'message' => __('pay-already-paid'),
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
+        // Solo se permite un único adelanto de salario
         $advanced = AdvanceSalary::where('year', $request->year)
             ->where('month', $request->month)
             ->where('employee_id', $employee->id)->first();
 
-        // Solo se permite un único adelanto de salario
         if (!empty($advanced->id)) {
             $notification = array(
                 'message' => __('advance-already-paid'),
@@ -143,21 +158,20 @@ class SalaryController extends Controller
     ///////////////////////////////////////////// PAGAR SALARIOS ///////////////////////////////////////////////////
     public function PaySalary()
     {
+        $employees = Employee::latest()->get();
         $month = date('F', strtotime('+1 month'));
         $year = date('Y');
-        $employees = Employee::latest()->get();
 
-        foreach ($employees as $key => $employee) {
-            $
-        }
-
-        return view('backend.salary.pay_salary', compact('employees'));
+        return view('backend.salary.pay_salary', compact('employees', 'year', 'month'));
     } // End Method 
 
     public function PayNowSalary($id)
     {
         $employee = Employee::findOrFail($id);
-        return view('backend.salary.paid_salary', compact('employee'));
+        $month = date('F', strtotime('+1 month'));
+        $year = date('Y');
+
+        return view('backend.salary.paid_salary', compact('employee', 'year', 'month'));
     } // End Method
 
     public function EmployeSalaryStore(Request $request)
@@ -166,6 +180,7 @@ class SalaryController extends Controller
 
         PaySalary::insert([
             'employee_id' => $employee_id,
+            'year' => $request->year,
             'month' => $request->month,
             'salary' => $request->salary,
             'advance_salary' => $request->advance_salary,
@@ -183,8 +198,8 @@ class SalaryController extends Controller
 
     public function MonthSalary()
     {
-        $paidsalary = PaySalary::latest()->get();
-        return view('backend.salary.month_salary', compact('paidsalary'));
+        $payments = PaySalary::latest()->get();
+        return view('backend.salary.all_payment', compact('payments'));
     } // End Method
 
     private function getNumMonth(?string $month): int

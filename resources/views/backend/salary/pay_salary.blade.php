@@ -41,7 +41,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">{{ __(date('F')) . ' ' . date('Y') }}</h4>
+                            <h4 class="header-title">{{ __($month) . ' ' . $year }}</h4>
 
                             <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                                 <thead>
@@ -60,15 +60,15 @@
                                 <tbody>
                                     @foreach ($employees as $key => $employee)
                                         @php
-                                            $employee->month = date('F', strtotime('+1 month'));
+                                            $due_amount =
+                                                $employee->salary -
+                                                (($employee['advance']['advance_salary'] ?? 0) +
+                                                    ($employee['payment']['paid_amount'] ?? 0));
 
-                                            foreach ($employee->advanceByMonth as $advance) {
-                                                $advanceSalary += $advance->advance_salary;
+                                            if ($due_amount < 0) {
+                                                $due_amount = 0;
                                             }
-
-                                            $amount = $employee->salary - $advanceSalary;
                                         @endphp
-
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td> <img src="{{ asset($employee->image) }}" style="width:50px; height: 40px;">
@@ -78,16 +78,23 @@
                                                 </span> </td>
                                             <td>Q {{ number_format($employee->salary, 2, '.', ',') }} </td>
                                             <td>
-                                                Q {{ number_format($advanceSalary, 2, '.', ',') }}
+                                                Q
+                                                {{ number_format($employee['advance']['advance_salary'] ?? 0, 2, '.', ',') }}
                                             </td>
                                             <td>
-                                                <strong style="color: #fff;"> Q {{ number_format($amount, 2, '.', ',') }}
+                                                <strong style="color: #fff;"> Q
+                                                    {{ number_format($due_amount, 2, '.', ',') }}
                                                 </strong>
                                             </td>
                                             <td>
-                                                <a href="{{ route('pay.now.salary', $employee->id) }}"
-                                                    class="btn btn-blue rounded-pill waves-effect waves-light">Pagar
-                                                    ahora</a>
+                                                @if ($due_amount === 0)
+                                                    <button class="btn btn-blue rounded-pill waves-effect waves-light" disabled>Ya
+                                                        está pagado</button>
+                                                @else
+                                                    <a href="{{ route('pay.now.salary', $employee->id) }}"
+                                                        class="btn btn-blue rounded-pill waves-effect waves-light">Pagar
+                                                        ahora</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

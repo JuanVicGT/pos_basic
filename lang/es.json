@@ -136,5 +136,6 @@
     "Employee Updated Successfully": "Empleado actualizado exitosamente",
     "Employee Deleted Successfully": "Empleado eliminado exitosamente",
     "filters": "Filtros",
-    "year": "Año"
+    "year": "Año",
+    "pay-already-paid": "El salario ya ha sido pagado"
 }
