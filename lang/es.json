@@ -137,5 +137,15 @@
     "Employee Deleted Successfully": "Empleado eliminado exitosamente",
     "filters": "Filtros",
     "year": "Año",
-    "pay-already-paid": "El salario ya ha sido pagado"
+    "pay-already-paid": "El salario ya ha sido pagado",
+    "Supplier Inserted Successfully": "Proveedor registrado exitosamente",
+    "Product Inserted Successfully": "Producto registrado exitosamente",
+    "Product Added Successfully": "Producto agregado exitosamente",
+    "Order Purchase Complete Successfully": "Orden de compra completada exitosamente",
+    "Customer Inserted Successfully": "Cliente registrado exitosamente",
+    "Dashboard": "Tablero",
+    "Sales Analytics": "Análisis de ventas",
+    "Resume of month": "Resumen del mes",
+    "Products with less stock": "Productos con stock bajo",
+    "No data found": "No se han encontrado datos"
 }
