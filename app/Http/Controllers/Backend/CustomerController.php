@@ -60,7 +60,7 @@ class CustomerController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Customer Inserted Successfully',
+            'message' => __('Customer Inserted Successfully'),
             'alert-type' => 'success'
         );
 
@@ -104,7 +104,7 @@ class CustomerController extends Controller
             ]);
 
             $notification = array(
-                'message' => 'Customer Updated Successfully',
+                'message' => __('Customer Updated Successfully'),
                 'alert-type' => 'success'
             );
 
@@ -128,7 +128,7 @@ class CustomerController extends Controller
             ]);
 
             $notification = array(
-                'message' => 'Customer Updated Successfully',
+                'message' => __('Customer Updated Successfully'),
                 'alert-type' => 'success'
             );
 
@@ -147,7 +147,7 @@ class CustomerController extends Controller
         Customer::findOrFail($id)->delete();
 
         $notification = array(
-            'message' => 'Customer Deleted Successfully',
+            'message' => __('Customer Deleted Successfully'),
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);

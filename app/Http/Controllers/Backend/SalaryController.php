@@ -189,7 +189,7 @@ class SalaryController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Employee Salary Paid Successfully',
+            'message' => __('Employee Salary Paid Successfully'),
             'alert-type' => 'success'
         );
 

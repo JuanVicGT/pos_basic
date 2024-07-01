@@ -30,7 +30,7 @@ class PosController extends Controller
             'options' => ['size' => 'large']
         ]);
         $notification = array(
-            'message' => 'Product Added Successfully',
+            'message' => __('Product Added Successfully'),
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
@@ -53,7 +53,7 @@ class PosController extends Controller
             'options' => ['size' => 'large']
         ]);
         $notification = array(
-            'message' => 'Product Added Successfully',
+            'message' => __('Product Added Successfully'),
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
@@ -71,7 +71,7 @@ class PosController extends Controller
         $update = Cart::update($rowId, $qty);
 
         $notification = array(
-            'message' => 'Cart Updated Successfully',
+            'message' => __('Cart Updated Successfully'),
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
@@ -79,11 +79,10 @@ class PosController extends Controller
 
     public function CartRemove($rowId)
     {
-
         Cart::remove($rowId);
 
         $notification = array(
-            'message' => 'Cart Remove Successfully',
+            'message' => __('Cart Remove Successfully'),
             'alert-type' => 'success'
         );
 

@@ -91,7 +91,7 @@ class UserController extends Controller
         $this->authorize('update', Auth::user());
 
         $user = User::findOrFail($request->id);
-        
+
         $user->update([
             'username' => $request->username,
             'email' => $request->email,
@@ -104,7 +104,7 @@ class UserController extends Controller
         $user->syncRoles([$request->role]);
 
         $notification = array(
-            'message' => 'User Updated Successfully',
+            'message' => __('User Updated Successfully'),
             'alert-type' => 'success'
         );
 

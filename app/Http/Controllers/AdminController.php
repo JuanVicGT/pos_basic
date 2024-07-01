@@ -21,7 +21,7 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         $notification = array(
-            'message' => 'Cierre de sesion exitoso',
+            'message' => __('Logout Successfully'),
             'alert-type' => 'info'
         );
 
@@ -59,7 +59,7 @@ class AdminController extends Controller
         $data->save();
 
         $notification = array(
-            'message' => 'Perfil actualizado correctamente',
+            'message' => __('Profile Updated Successfully'),
             'alert-type' => 'success'
         );
 
@@ -85,7 +85,7 @@ class AdminController extends Controller
         if (!Hash::check($request->old_password, auth::user()->password)) {
 
             $notification = array(
-                'message' => 'Old Password Dones not Match!!',
+                'message' => __('Old Password Dones not Match!!'),
                 'alert-type' => 'error'
             );
             return back()->with($notification);
@@ -98,7 +98,7 @@ class AdminController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Password Change Successfully',
+            'message' => __('Password Change Successfully'),
             'alert-type' => 'success'
         );
         return back()->with($notification);

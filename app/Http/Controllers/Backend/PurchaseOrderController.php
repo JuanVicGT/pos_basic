@@ -71,7 +71,7 @@ class PurchaseOrderController extends Controller
         } // end foreach
 
         $notification = array(
-            'message' => 'Order Purchase Complete Successfully',
+            'message' => __('Purchase Order Complete Successfully'),
             'alert-type' => 'success'
         );
 
@@ -93,7 +93,7 @@ class PurchaseOrderController extends Controller
         PurchaseOrder::findOrFail($order_id)->update(['order_status' => 'complete']);
 
         $notification = array(
-            'message' => 'Order Done Successfully',
+            'message' => ('Purchase Order Done Successfully'),
             'alert-type' => 'success'
         );
 

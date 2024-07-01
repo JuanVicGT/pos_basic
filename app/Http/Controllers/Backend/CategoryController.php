@@ -1,63 +1,69 @@
 <?php
+
 namespace App\Http\Controllers\Backend;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Carbon\Carbon;
+
 class CategoryController extends Controller
 {
-    public function AllCategory(){
+    public function AllCategory()
+    {
         $category = Category::latest()->get();
-        return view('backend.category.all_category',compact('category'));
-    }// End Method
-    public function StoreCategory(Request $request){
+        return view('backend.category.all_category', compact('category'));
+    } // End Method
+    public function StoreCategory(Request $request)
+    {
         Category::insert([
             'category_name' => $request->category_name,
             'created_at' => Carbon::now(),
         ]);
-         $notification = array(
-            'message' => 'Agregada nueva categoria',
+        $notification = array(
+            'message' => __('New Category Inserted Successfully'),
             'alert-type' => 'success'
         );
-        return redirect()->route('all.category')->with($notification);  
-    }// End Method
+        return redirect()->route('all.category')->with($notification);
+    } // End Method
 
 
-    public function EditCategory($id){
+    public function EditCategory($id)
+    {
         $category = Category::findOrFail($id);
-        return view('backend.category.edit_category',compact('category'));
+        return view('backend.category.edit_category', compact('category'));
+    } // End Method
 
-    }// End Method
 
-
-    public function UpdateCategory(Request $request){
+    public function UpdateCategory(Request $request)
+    {
 
         $category_id = $request->id;
 
-          Category::findOrFail($category_id)->update([
+        Category::findOrFail($category_id)->update([
             'category_name' => $request->category_name,
             'created_at' => Carbon::now(),
         ]);
 
-         $notification = array(
-            'message' => 'Categoria Actualizada correctamente',
+        $notification = array(
+            'message' => __('Category Updated Successfully'),
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.category')->with($notification);   
+        return redirect()->route('all.category')->with($notification);
+    } // End Method
 
-    }// End Method
 
-
-    public function DeleteCategory($id){
+    public function DeleteCategory($id)
+    {
 
         Category::findOrFail($id)->delete();
 
-         $notification = array(
-            'message' => 'Categoria Eliminada',
+        $notification = array(
+            'message' => __('Category Deleted Successfully'),
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);  
-    }// End Method
+        return redirect()->back()->with($notification);
+    } // End Method
 }

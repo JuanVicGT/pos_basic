@@ -11,7 +11,7 @@ use App\Models\Orderdetails;
 use App\Models\User;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -54,7 +54,7 @@ class OrderController extends Controller
         } // end foreach
 
         $notification = array(
-            'message' => 'Order Complete Successfully',
+            'message' => __('Order Complete Successfully'),
             'alert-type' => 'success'
         );
 
@@ -96,7 +96,7 @@ class OrderController extends Controller
         Order::findOrFail($order_id)->update(['order_status' => 'complete']);
 
         $notification = array(
-            'message' => 'Order Done Successfully',
+            'message' => __('Order Done Successfully'),
             'alert-type' => 'success'
         );
 
@@ -125,7 +125,7 @@ class OrderController extends Controller
 
         if (empty($order->invoice_no)) {
             $notification = array(
-                'message' => 'Proof not found',
+                'message' => __('Proof not found'),
                 'alert-type' => 'error'
             );
 
@@ -135,7 +135,7 @@ class OrderController extends Controller
         $order->printTicket($user->printer);
 
         $notification = array(
-            'message' => 'Printed Successfully',
+            'message' => __('Printed Successfully'),
             'alert-type' => 'success'
         );
 

@@ -44,7 +44,7 @@ class ProductController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Product Inserted Successfully',
+            'message' => __('Product Inserted Successfully'),
             'alert-type' => 'success'
         );
         return redirect()->route('all.product')->with($notification);
@@ -81,7 +81,7 @@ class ProductController extends Controller
             ]);
 
             $notification = array(
-                'message' => 'Product Updated Successfully',
+                'message' => __('Product Updated Successfully'),
                 'alert-type' => 'success'
             );
 
@@ -100,7 +100,7 @@ class ProductController extends Controller
             ]);
 
             $notification = array(
-                'message' => 'Product Updated Successfully',
+                'message' => __('Product Updated Successfully'),
                 'alert-type' => 'success'
             );
 
@@ -117,7 +117,7 @@ class ProductController extends Controller
         Product::findOrFail($id)->delete();
 
         $notification = array(
-            'message' => 'Product Deleted Successfully',
+            'message' => __('Product Deleted Successfully'),
             'alert-type' => 'success'
         );
 

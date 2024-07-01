@@ -35,7 +35,7 @@ class AttendenceController extends Controller
             $attend->save();
         }
         $notification = array(
-            'message' => 'Data Inseted Successfully',
+            'message' => __('Data Inseted Successfully'),
             'alert-type' => 'success'
         );
         return redirect()->route('employee.attend.list')->with($notification);
