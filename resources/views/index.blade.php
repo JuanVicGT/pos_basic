@@ -21,50 +21,54 @@
             <!-- end page title -->
 
             <div class="row">
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-primary border-primary border shadow">
-                                        <i class="fe-box font-22 avatar-title text-white"></i>
+                @can('can_purchase')
+                    <div class="col-md-6 col-xl-4">
+                        <div class="widget-rounded-circle card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-lg rounded-circle bg-primary border-primary border shadow">
+                                            <i class="fe-box font-22 avatar-title text-white"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="text-dark mt-1">Q <span
-                                                data-plugin="counterup">{{ $purchasesTotal }}</span></h3>
-                                        <p class="text-muted mb-1 text-truncate">{{ __('Total Purchases') }}</p>
+                                    <div class="col-6">
+                                        <div class="text-end">
+                                            <h3 class="text-dark mt-1">Q <span
+                                                    data-plugin="counterup">{{ $purchasesTotal }}</span></h3>
+                                            <p class="text-muted mb-1 text-truncate">{{ __('Total Purchases') }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                                </div> <!-- end row-->
+                            </div>
+                        </div> <!-- end widget-rounded-circle-->
+                    </div> <!-- end col-->
+                @endcan
 
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-success border-success border shadow">
-                                        <i class="fe-shopping-cart font-22 avatar-title text-white"></i>
+                @can('can_sale')
+                    <div class="col-md-6 col-xl-4">
+                        <div class="widget-rounded-circle card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-lg rounded-circle bg-success border-success border shadow">
+                                            <i class="fe-shopping-cart font-22 avatar-title text-white"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="text-dark mt-1">Q <span
-                                                data-plugin="counterup">{{ $salesTotal }}</span>
-                                        </h3>
-                                        <p class="text-muted mb-1 text-truncate">{{ __('Total Sales') }}</p>
+                                    <div class="col-6">
+                                        <div class="text-end">
+                                            <h3 class="text-dark mt-1">Q <span
+                                                    data-plugin="counterup">{{ $salesTotal }}</span>
+                                            </h3>
+                                            <p class="text-muted mb-1 text-truncate">{{ __('Total Sales') }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                                </div> <!-- end row-->
+                            </div>
+                        </div> <!-- end widget-rounded-circle-->
+                    </div> <!-- end col-->
+                @endcan
 
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
                             <div class="row">
@@ -86,7 +90,7 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
                             <div class="row">
@@ -126,7 +130,8 @@
                                         <tr>
                                             <th>{{ __('Code') }}</th>
                                             <th>{{ __('Name') }}</th>
-                                            <th>{{ __('Stock') }}</th>
+                                            <th>{{ __('Minimum Stock') }}</th>
+                                            <th>{{ __('Current Stock') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,11 +140,12 @@
                                             <tr>
                                                 <td>{{ $item->product_code }}</td>
                                                 <td>{{ $item->product_name }}</td>
+                                                <td>{{ $item->product_garage }}</td>
                                                 <td>{{ $item->product_store }}</td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="3" class="text-center text-white">
+                                                <td colspan="4" class="text-center text-white">
                                                     {{ __('No data found') }}
                                                 </td>
                                             </tr>

@@ -51,7 +51,8 @@ class DashboardController extends Controller
             ->count();
 
         // ==== Products with less stock
-        $products = Product::orderBy('product_store', 'asc')
+        $products = Product::whereRaw('product_store < product_garage')
+            ->orderBy('product_store', 'asc')
             ->take(25)
             ->get();
 

@@ -54,7 +54,7 @@ class UserController extends Controller
         $user->assignRole($request->role);
 
         $notification = array(
-            'message' => 'User Insert Successfully',
+            'message' => __('User Insert Successfully, with password :password', ['password' => 'RUDEMAX2024']),
             'alert-type' => 'success'
         );
 

@@ -147,5 +147,22 @@
     "Sales Analytics": "Análisis de ventas",
     "Resume of month": "Resumen del mes",
     "Products with less stock": "Productos con stock bajo",
-    "No data found": "No se han encontrado datos"
+    "No data found": "No se han encontrado datos",
+    "User Insert Successfully, with password :password": "Usuario registrado exitosamente, con contraseña :password",
+    "User Updated Successfully": "Usuario actualizado exitosamente",
+    "Total Purchases": "Total de compras",
+    "Total Sales": "Total de ventas",
+    "Total Profit": "Total de ganancias",
+    "Total Expense": "Total de gastos",
+    "Total Stock": "Total de stock",
+    "Total Customer": "Total de clientes",
+    "Total Employee": "Total de empleos",
+    "Total Supplier": "Total de proveedores",
+    "Total Users": "Total de usuarios",
+    "Total Product": "Total de productos",
+    "Pending Amount": "Monto pendiente",
+    "New Customers": "Nuevos clientes",
+    "Code": "Código",
+    "Minimum Stock": "Stock mínimo",
+    "Current Stock": "Stock actual"
 }
