@@ -1,7 +1,8 @@
 @extends('admin_dashboard')
 @section('admin')
-    <div class="content">
+    <script src="{{ asset('backend/assets/js/page/product_invoice.js') }}"></script>
 
+    <div class="content">
         <!-- Start Content-->
         <div class="container-fluid">
 
@@ -122,7 +123,7 @@
                             <div class="mt-4 mb-1">
                                 <div class="text-end d-print-none">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#signup-modal">Crear factura </button>
+                                        data-bs-target="#signup-modal">Crear factura</button>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +152,7 @@
 
                         <div class="mb-3">
                             <label for="username" class="form-label">{{ __('Payment') }}</label>
-                            <select name="payment_status" class="form-select" id="example-select">
+                            <select name="payment_status" class="form-select" id="payment-type">
                                 <option selected disabled>{{ __('Select Payment') }}</option>
 
                                 <option value="HandCash">{{ __('handcash') }}</option>
@@ -164,7 +165,14 @@
 
                         <div class="mb-3">
                             <label for="username" class="form-label">{{ __('amount') }}</label>
-                            <input class="form-control" type="text" name="pay" placeholder="{{ __('amount') }}">
+                            <input class="form-control" type="number" step="any" name="pay" id="pay"
+                                placeholder="{{ __('amount') }}">
+                        </div>
+
+                        {{-- Only for HandCash --}}
+                        <div class="mb-3 class" id="payback-group">
+                            <label for="payback" class="form-label">{{ __('payback') }}</label>
+                            <input class="form-control" type="number" step="any" name="payback" id="payback" readonly>
                         </div>
 
                         <input type="hidden" name="customer_id" value="{{ $customer->id }}">
@@ -174,8 +182,9 @@
                         <input type="hidden" name="total_products" value="{{ (int) Cart::count() }}">
                         <input type="hidden" name="sub_total"
                             value="{{ number_format((float) Cart::subtotal(6, '.', ''), 6) }}">
-                        <input type="hidden" name="tax" value="{{ number_format((float) Cart::tax(6, '.', ''), 6) }}">
-                        <input type="hidden" name="total"
+                        <input type="hidden" name="tax"
+                            value="{{ number_format((float) Cart::tax(6, '.', ''), 6) }}">
+                        <input type="hidden" name="total" id="total"
                             value="{{ number_format((float) Cart::total(6, '.', ''), 6) }}">
 
                         <div class="mb-3 text-center">

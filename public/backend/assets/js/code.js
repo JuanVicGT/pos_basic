@@ -12,23 +12,37 @@ $(function () {
         e.preventDefault();
         var link = $(this).attr("href");
 
-        Swal.fire({
+        swal({
             title: '¿Esta seguro?',
             text: "¿Va a eliminar esta información?",
             icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, eliminar!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = link
-                Swal.fire(
+            buttons: {
+                cancel: {
+                    text: 'Cancelar',
+                    value: null,
+                    visible: true,
+                    className: 'btn btn-danger',
+                    closeModal: true,
+                },
+                confirm: {
+                    text: 'Sí, eliminar!',
+                    value: true,
+                    visible: true,
+                    className: 'btn btn-primary',
+                    closeModal: true
+                }
+            }
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal(
                     'Eliminado!',
                     'Se ha eliminado.',
                     'success'
-                )
+                ).then(function () {
+                    window.location.href = link;
+                });
             }
-        })
+        });
+
     });
 });

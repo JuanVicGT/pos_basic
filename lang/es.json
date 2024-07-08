@@ -203,5 +203,7 @@
     "Cart Remove Successfully": "Carrito eliminado exitosamente",
     "Purchase Order Complete Successfully": "Orden de compra completada exitosamente",
     "Purchase Order Done Successfully": "Orden de compra completada exitosamente",
-    "Employee Salary Paid Successfully": "Salario del empleado pagado exitosamente"
+    "Employee Salary Paid Successfully": "Salario del empleado pagado exitosamente",
+    "Payback": "Vuelto",
+    "payback": "Vuelto"
 }
