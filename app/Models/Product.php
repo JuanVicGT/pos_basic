@@ -12,9 +12,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string product_name
  * @property string barcode
  * @property string product_code
- * @property string product_garage
  * @property string product_image
  * @property string product_store
+ * 
+ * @property float product_garage
  * @property float buying_price
  * @property float selling_price
  */

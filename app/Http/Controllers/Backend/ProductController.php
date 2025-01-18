@@ -26,16 +26,31 @@ class ProductController extends Controller
 
     public function StoreProduct(Request $request)
     {
+        $validate = $request->validate([
+            'product_name' => 'required|unique:products',
+            'barcode' => 'required',
+            'category_id' => 'required',
+            'product_image' => 'required',
+            'product_garage' => 'required|numeric',
+            'product_store' => 'required|numeric',
+            'buying_price' => 'required',
+            'selling_price' => 'required'
+        ]);
+
         $pcode = IdGenerator::generate(['table' => 'products', 'field' => 'product_code', 'length' => 4, 'prefix' => 'PC']);
         $image = $request->file('product_image');
         $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         Image::make($image)->resize(300, 300)->save('upload/product/' . $name_gen);
         $save_url = 'upload/product/' . $name_gen;
+
+        $stock = $request->product_garage === 0 ? 0.0 : $request->product_garage;
+
         Product::insert([
             'product_name' => $request->product_name,
+            'barcode' => $request->barcode,
             'category_id' => $request->category_id,
             'product_code' => $pcode,
-            'product_garage' => $request->product_garage,
+            'product_garage' => $stock,
             'product_store' => $request->product_store,
             'buying_price' => $request->buying_price,
             'selling_price' => $request->selling_price,

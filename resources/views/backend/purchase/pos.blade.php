@@ -120,10 +120,11 @@
                                 <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                                     <thead>
                                         <tr>
-                                            <th>Sl</th>
-                                            <th>Image</th>
-                                            <th>Name</th>
-                                            <th> </th>
+                                            <th>{{ __('No') }}</th>
+                                            <th>{{ __('Image') }}</th>
+                                            <th>{{ __('Description') }}</th>
+                                            <th>{{ __('Stock') }}</th>
+                                            <th>{{ __('Action') }}</th>
                                         </tr>
                                     </thead>
 
@@ -140,6 +141,7 @@
                                                     <td> <img src="{{ asset($item->product_image) }}"
                                                             style="width:50px; height: 40px;"> </td>
                                                     <td>{{ $item->product_name }}</td>
+                                                    <td>{{ $item->product_store }}</td>
                                                     <td><button type="submit" style="font-size: 20px; color: #000;"> <i
                                                                 class="fas fa-plus-square"></i> </button> </td>
 

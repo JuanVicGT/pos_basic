@@ -205,5 +205,22 @@
     "Purchase Order Done Successfully": "Orden de compra completada exitosamente",
     "Employee Salary Paid Successfully": "Salario del empleado pagado exitosamente",
     "Payback": "Vuelto",
-    "payback": "Vuelto"
+    "payback": "Vuelto",
+    "Order Date": "Fecha de orden",
+    "Order": "Orden",
+    "order": "Orden",
+    "order-status": "Estado de la orden",
+    "Order Status": "Estado de la orden",
+    "Order Details": "Detalles de la orden",
+    "Invoice": "Factura",
+    "invoice": "Factura",
+    "Invoice No": "Factura No",
+    "Invoice No.": "Factura No.",
+    "Invoice Details": "Detalles de la factura",
+    "Invoice Date": "Fecha de la factura",
+    "Invoice Generated": "Factura generada",
+    "Action": "Acción",
+    "Stock": "Existencias",
+    "Min Stock": "Existencias recomendadas",
+    "Barcode": "Código de barras"
 }

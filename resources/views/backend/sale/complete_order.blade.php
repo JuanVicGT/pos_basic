@@ -39,14 +39,14 @@
                                 <thead>
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Order Date</th>
-                                        <th>Payment</th>
-                                        <th>Invoice</th>
-                                        <th>Pay</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>{{ __('Image') }}</th>
+                                        <th>{{ __('Name') }}</th>
+                                        <th>{{ __('Order Date') }}</th>
+                                        <th>{{ __('Payment') }}</th>
+                                        <th>{{ __('Invoice') }}</th>
+                                        <th>{{ __('Pay') }}</th>
+                                        <th>{{ __('Status') }}</th>
+                                        <th>{{ __('Action') }}</th>
                                     </tr>
                                 </thead>
 

@@ -40,9 +40,9 @@
                                 <thead>
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Order Date</th>
-                                        <th>Invoice</th>
-                                        <th>Action</th>
+                                        <th>{{ __('Order Date') }}</th>
+                                        <th>{{ __('Invoice') }}</th>
+                                        <th>{{ __('Action') }}</th>
                                     </tr>
                                 </thead>
 

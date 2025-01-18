@@ -48,15 +48,23 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Nombre*</label>
-                                                <input type="text" name="product_name" class="form-control">
+                                                <label for="product_name" class="form-label">Nombre*</label>
+                                                <input type="text" name="product_name" class="form-control" autofocus
+                                                    value="{{ old('product_name') }}">
+                                                @error('product_name')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="form-group mb-3">
                                                 <label for="barcode" class="form-label">Código de barras</label>
-                                                <input type="text" name="barcode" class="form-control">
+                                                <input type="text" name="barcode" class="form-control"
+                                                    value="{{ old('barcode') }}">
+                                                @error('barcode')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -66,54 +74,75 @@
                                                 <select name="category_id" class="form-select" id="example-select">
                                                     <option selected disabled>Seleccione la categoria</option>
                                                     @foreach ($category as $cat)
-                                                        <option value="{{ $cat->id }}">{{ $cat->category_name }}
+                                                        <option value="{{ $cat->id }}" @selected($cat->id == old('category_id'))>
+                                                            {{ $cat->category_name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                @error('category_id')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Almacenamiento del
-                                                    producto*</label>
-                                                <input type="text" name="product_garage" class="form-control ">
+                                                <label for="firstname" class="form-label">{{ __('Min Stock') }}*</label>
+                                                <input type="number" step="any" name="product_garage"
+                                                    class="form-control" value="{{ old('product_garage') }}">
+                                                @error('product_garage')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Tienda*</label>
-                                                <input type="text" name="product_store" class="form-control ">
+                                                <label for="product_store" class="form-label">{{ __('Stock') }}*</label>
+                                                <input type="number" step="any" name="product_store"
+                                                    class="form-control" value="{{ old('product_store') }}">
+                                                @error('product_store')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Precio Compra*</label>
-                                                <input type="text" name="buying_price" class="form-control ">
+                                                <label for="buying_price" class="form-label">Precio Compra*</label>
+                                                <input type="number" step="any" name="buying_price"
+                                                    class="form-control" value="{{ old('buying_price') }}">
+                                                @error('buying_price')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Precio venta*</label>
-                                                <input type="text" name="selling_price" class="form-control ">
+                                                <label for="selling_price" class="form-label">Precio venta*</label>
+                                                <input type="number" step="any" name="selling_price"
+                                                    class="form-control" value="{{ old('selling_price') }}">
+                                                @error('image')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-md-12">
                                             <div class="form-group mb-3">
-                                                <label for="example-fileinput" class="form-label">Imagen del
-                                                    producto*</label>
+                                                <label for="product_image" class="form-label">Imagen del producto*</label>
                                                 <input type="file" name="product_image" id="image"
                                                     class="form-control">
+                                                @error('image')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
                                         </div> <!-- end col -->
 
                                         <div class="col-md-12">
                                             <div class="form-group mb-3">
-                                                <label for="example-fileinput" class="form-label"> </label>
+                                                <label for="product_image" class="form-label"> </label>
                                                 <img id="showImage" src="{{ url('upload/no_image.jpg') }}"
                                                     class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
                                             </div>

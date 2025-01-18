@@ -8,13 +8,14 @@
         <div class="container-fluid">
 
             <!-- start page title -->
-            <div class="row">
+            <div class="row ">
                 <div class="col-12">
                     <div class="page-title-box">
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Editar Producto</a></li>
-                            </ol>
+                        <div class="page-title-right d-flex align-items-center mt-2">
+                            <a href="{{ route('all.product') }}" class="btn btn-primary">
+                                <i class="mdi mdi-keyboard-backspace" style="font-size: 20px;"></i>
+                                Regresar al listado
+                            </a>
                         </div>
                         <h4 class="page-title">Editar Producto</h4>
                     </div>
@@ -44,26 +45,27 @@
                                     @csrf
 
                                     <input type="hidden" name="id" value="{{ $product->id }}">
-                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Editar</h5>
+                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i>Editar</h5>
 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Nombre</label>
+                                                <label for="firstname" class="form-label">Nombre*</label>
                                                 <input type="text" name="product_name" class="form-control"
-                                                    value="{{ $product->product_name }}">
+                                                    value="{{ old('product_name', $product->product_name) }}">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Categoria </label>
+                                                <label for="firstname" class="form-label">Categoria*</label>
                                                 <select name="category_id" class="form-select" id="example-select">
                                                     <option selected disabled>Selecciona la categoria</option>
                                                     @foreach ($category as $cat)
                                                         <option value="{{ $cat->id }}"
-                                                            {{ $cat->id == $product->category_id ? 'selected' : '' }}>
-                                                            {{ $cat->category_name }}</option>
+                                                            {{ $cat->id == old('category_id', $product->category_id) ? 'selected' : '' }}>
+                                                            {{ $cat->category_name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -71,49 +73,53 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Código</label>
-                                                <input type="text" name="product_code" class="form-control "
-                                                    value="{{ $product->product_code }}">
+                                                <label for="firstname" class="form-label">Código*</label>
+                                                <input type="text" name="product_code" class="form-control"
+                                                    value="{{ old('product_code', $product->product_code) }}">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="barcode" class="form-label">Código de barras</label>
+                                                <label for="barcode" class="form-label">{{ __('Barcode') }}</label>
                                                 <input type="text" name="barcode" class="form-control "
-                                                    value="{{ $product->barcode }}">
+                                                    value="{{ old('barcode', $product->barcode) }}">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Almacenamiento</label>
-                                                <input type="text" name="product_garage" class="form-control "
-                                                    value="{{ $product->product_garage }}">
+                                                <label for="firstname" class="form-label">{{ __('Min Stock') }}*</label>
+                                                <input type="number" step="any" name="product_garage"
+                                                    class="form-control "
+                                                    value="{{ old('product_garage', $product->product_garage) }}">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Stock</label>
-                                                <input type="text" name="product_store" class="form-control "
-                                                    value="{{ $product->product_store }}">
+                                                <label for="firstname" class="form-label">{{ __('Stock') }}*</label>
+                                                <input type="number" step="any" name="product_store"
+                                                    class="form-control "
+                                                    value="{{ old('product_store', $product->product_store) }}">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Precio compra</label>
-                                                <input type="text" name="buying_price" class="form-control "
-                                                    value="{{ $product->buying_price }}">
+                                                <label for="firstname" class="form-label">Precio compra*</label>
+                                                <input type="number" step="any" name="buying_price"
+                                                    class="form-control "
+                                                    value="{{ old('buying_price', $product->buying_price) }}">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Precio venta</label>
-                                                <input type="text" name="selling_price" class="form-control "
-                                                    value="{{ $product->selling_price }}">
+                                                <label for="firstname" class="form-label">Precio venta*</label>
+                                                <input type="number" step="any" name="selling_price"
+                                                    class="form-control "
+                                                    value="{{ old('selling_price', $product->selling_price) }}">
                                             </div>
                                         </div>
 

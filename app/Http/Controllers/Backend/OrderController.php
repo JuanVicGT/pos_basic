@@ -63,8 +63,10 @@ class OrderController extends Controller
         $id = Auth::user()->id;
         $user = User::findOrFail($id);
 
-        $order = Order::findOrFail($user->printer);
-        $order->printTicket();
+        if (!empty($user->printer)) {
+            $order = Order::findOrFail($user->printer);
+            $order->printTicket();
+        }
 
         return redirect()->route('pos')->with($notification);
     } // End Method

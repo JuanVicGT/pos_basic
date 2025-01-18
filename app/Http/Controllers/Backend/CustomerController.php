@@ -28,19 +28,22 @@ class CustomerController extends Controller
 
         $validateData = $request->validate([
             'name' => 'required|max:200',
-            'email' => 'required|unique:customers|max:200',
-            'phone' => 'required|max:200',
-            'address' => 'required|max:400',
-            'shopname' => 'required|max:200',
-            'account_holder' => 'required|max:200',
-            'account_number' => 'required',
-            'image' => 'required',
+            'email' => 'nullable|unique:customers|max:200',
+            'phone' => 'nullable|max:200',
+            'address' => 'nullable|max:400',
+            'shopname' => 'nullable|max:200',
+            'account_holder' => 'nullable|max:200',
+            'account_number' => 'nullable',
+            'image' => 'nullable',
         ]);
 
-        $image = $request->file('image');
-        $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-        Image::make($image)->resize(300, 300)->save('upload/customer/' . $name_gen);
-        $save_url = 'upload/customer/' . $name_gen;
+        $save_url = null;
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 300)->save('upload/customer/' . $name_gen);
+            $save_url = 'upload/customer/' . $name_gen;
+        }
 
         Customer::insert([
 
