@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CashMovement;
 use Illuminate\Http\Request;
 use App\Models\Expense;
 use Carbon\Carbon;
@@ -16,8 +17,12 @@ class ExpenseController extends Controller
 
     public function StoreExpense(Request $request)
     {
-        Expense::insert([
+        $request->validate([
+            'details' => ['required', 'string'],
+            'amount' => ['required', 'numeric']
+        ]);
 
+        $expense_id = Expense::insertGetId([
             'details' => $request->details,
             'amount' => $request->amount,
             'month' => $request->month,
@@ -25,6 +30,8 @@ class ExpenseController extends Controller
             'date' => $request->date,
             'created_at' => Carbon::now(),
         ]);
+
+        CashMovement::addExpense($request->amount, 'expense', $expense_id, $request->details);
 
         $notification = array(
             'message' => __('Expense Inserted Successfully'),

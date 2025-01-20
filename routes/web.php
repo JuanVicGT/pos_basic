@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ExpenseController;
+use App\Http\Controllers\Backend\IncomeController;
 use App\Http\Controllers\Backend\PosController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PurchasePosController;
@@ -154,6 +155,18 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/year/filter/expense', 'FilterYearExpense')->name('filter.year.expense');
     });
 
+    /// Ingresos rutas
+    Route::controller(IncomeController::class)->group(function () {
+        Route::get('/add/income', 'AddIncome')->name('add.income');
+        Route::post('/store/income', 'StoreIncome')->name('income.store');
+        Route::get('/today/income', 'TodayIncome')->name('today.income');
+        Route::get('/edit/income/{id}', 'EditIncome')->name('edit.income');
+        Route::post('/update/income', 'UpdateIncome')->name('income.update');
+        Route::get('/month/income', 'MonthIncome')->name('month.income');
+        Route::get('/year/income/{year?}', 'YearIncome')->name('year.income');
+        Route::post('/year/filter/income', 'FilterYearIncome')->name('filter.year.income');
+    });
+
     ///POS rutas 
     Route::controller(PosController::class)->group(function () {
         Route::get('/pos', 'Pos')->name('pos');
@@ -193,6 +206,7 @@ Route::middleware(['auth'])->group(function () {
 
     /// Reports / Reportes
     Route::controller(ReportController::class)->group(function () {
-        Route::get('/report/difference', 'SalePurchaseDifference')->name('report.difference');
+        Route::get('/report/difference', 'GeneralBalance')->name('report.difference');
+        Route::post('/report/difference', 'FilterGeneralBalance')->name('report.difference.search');
     });
 }); // End User Middleware 

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CashMovement;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Orderdetails;
+use App\Models\ProductMovement;
 use App\Models\User;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -33,6 +35,9 @@ class OrderController extends Controller
         $order_id = Order::insertGetId($data);
         $contents = Cart::content();
 
+        $amount = (float) Cart::total(6, '.', '');
+        CashMovement::addIncome($amount, 'sale', $order_id, $data['invoice_no']);
+
         $pdata = array();
         foreach ($contents as $item) {
             $pdata['order_id'] = $order_id;
@@ -51,6 +56,8 @@ class OrderController extends Controller
             ]);
 
             Orderdetails::insert($pdata);
+
+            ProductMovement::addMovement($item->id, (float) ($item->qty * -1), $order_id, __('Sale Order'), $item->name);
         } // end foreach
 
         $notification = array(

@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\CashMovement;
+use App\Models\ProductMovement;
 
 class PurchaseOrderController extends Controller
 {
@@ -43,6 +45,9 @@ class PurchaseOrderController extends Controller
         $order_id = PurchaseOrder::insertGetId($data);
         $items = Cart::content();
 
+        $amount = (float) Cart::instance('purchase')->total(6, '.', '');
+        CashMovement::addExpense($amount, 'purchase', $order_id, $data['invoice_no']);
+
         $pdata = array();
         foreach ($items as $item) {
             $pdata['order_id'] = $order_id;
@@ -68,6 +73,8 @@ class PurchaseOrderController extends Controller
             ]);
 
             PurchaseOrderDetail::insert($pdata);
+
+            ProductMovement::addMovement($item->id, (float) ($item->qty), $order_id, __('Purchase Order'), $item->name);
         } // end foreach
 
         $notification = array(

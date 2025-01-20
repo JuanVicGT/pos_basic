@@ -6,7 +6,7 @@
             <ul id="side-menu">
 
                 <!-- Accesos directos -->
-                <li class="menu-title">Favoritos</li>
+                <li class="menu-title text-white">Favoritos</li>
 
                 <li>
                     <a href="{{ url('/dashboard') }}">
@@ -26,8 +26,8 @@
                 @endcan
 
                 <!-- Módulo administación -->
-                @canany(['can_employee', 'can_paysalary', 'can_assistance', 'can_expense'])
-                    <li class="menu-title mt-2">Administración</li>
+                @canany(['can_employee', 'can_paysalary', 'can_assistance', 'can_expense', 'can_income'])
+                    <li class="menu-title mt-2 text-white">Administración</li>
                 @endcanany
 
                 @if (auth()->user()->admin)
@@ -35,6 +35,13 @@
                         <a href="{{ route('all.user') }}">
                             <i class="mdi mdi-account-multiple-outline"></i>
                             <span>{{ __('list-users') }}</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('all.user') }}">
+                            <i class="mdi mdi-account-multiple-outline"></i>
+                            <span>{{ __('List Roles') }}</span>
                         </a>
                     </li>
                 @endif
@@ -127,10 +134,36 @@
                         </div>
                     </li>
                 @endcan
+                
+                @can('can_expense')
+                    <li>
+                        <a href="#sidebarIncome" data-bs-toggle="collapse">
+                            <i class="mdi mdi-account-circle-outline"></i>
+                            <span> Ingresos </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarIncome">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('add.income') }}">Agregar Ingreso</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('today.income') }}">Ingresos del dia</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('month.income') }}">Ingresos mensuales</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('year.income') }}">Ingresos anuales</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
                 <!-- Módulo inventario -->
                 @canany(['can_category', 'can_product'])
-                    <li class="menu-title mt-2">{{ __('inventory') }}</li>
+                    <li class="menu-title mt-2 text-white">{{ __('inventory') }}</li>
                 @endcanany
 
                 @can('can_category')
@@ -171,7 +204,7 @@
 
                 <!-- Módulo de compras -->
                 @canany(['can_supplier', 'can_purchase'])
-                    <li class="menu-title mt-2">{{ __('purchases') }}</li>
+                    <li class="menu-title mt-2 text-white">{{ __('purchases') }}</li>
                 @endcanany
 
                 @can('can_supplier')
@@ -216,7 +249,7 @@
 
                 <!-- Módulo de ventas -->
                 @canany(['can_sale', 'can_customer'])
-                    <li class="menu-title mt-2">{{ __('sales') }}</li>
+                    <li class="menu-title mt-2 text-white">{{ __('sales') }}</li>
                 @endcanany
 
                 @can('can_customer')
@@ -250,7 +283,7 @@
 
                 <!-- Módulo de reportes -->
                 @can('can_report')
-                    <li class="menu-title mt-2">{{ __('reports') }}</li>
+                    <li class="menu-title mt-2 text-white">{{ __('reports') }}</li>
 
                     <li>
                         <a href="{{ route('report.difference') }}">
