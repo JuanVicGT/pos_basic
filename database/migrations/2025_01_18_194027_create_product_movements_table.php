@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('detail');
             $table->string('doc_id')->nullable();
             $table->string('doc_type')->nullable();
-            $table->string('date')->nullable();
+            $table->date('date')->nullable();
 
             $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('cascade');
             $table->timestamps();

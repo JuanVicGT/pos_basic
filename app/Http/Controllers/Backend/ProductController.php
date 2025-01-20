@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ProductMovement;
 use Intervention\Image\Facades\Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -45,7 +46,7 @@ class ProductController extends Controller
 
         $stock = $request->product_garage === 0 ? 0.0 : $request->product_garage;
 
-        Product::insert([
+        $product_id = Product::insertGetId([
             'product_name' => $request->product_name,
             'barcode' => $request->barcode,
             'category_id' => $request->category_id,
@@ -57,6 +58,8 @@ class ProductController extends Controller
             'product_image' => $save_url,
             'created_at' => Carbon::now(),
         ]);
+
+        ProductMovement::addMovement($product_id, (float) ($request->product_store), NULL, __('Creation'), $request->product_name);
 
         $notification = array(
             'message' => __('Product Inserted Successfully'),
@@ -75,6 +78,8 @@ class ProductController extends Controller
     public function UdateProduct(Request $request)
     {
         $product_id = $request->id;
+        $last_stock = 0;
+        $new_stock = $request->product_store;
 
         if ($request->file('product_image')) {
             $image = $request->file('product_image');
@@ -82,7 +87,11 @@ class ProductController extends Controller
             Image::make($image)->resize(300, 300)->save('upload/product/' . $name_gen);
             $save_url = 'upload/product/' . $name_gen;
 
-            Product::findOrFail($product_id)->update([
+            $product = Product::findOrFail($product_id);
+
+            $last_stock = $product->product_store;
+
+            $product->update([
                 'product_name' => $request->product_name,
                 'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
@@ -102,7 +111,11 @@ class ProductController extends Controller
 
             return redirect()->route('all.product')->with($notification);
         } else {
-            Product::findOrFail($product_id)->update([
+            $product = Product::findOrFail($product_id);
+
+            $last_stock = $product->product_store;
+
+            $product->update([
                 'product_name' => $request->product_name,
                 'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
@@ -118,6 +131,18 @@ class ProductController extends Controller
                 'message' => __('Product Updated Successfully'),
                 'alert-type' => 'success'
             );
+
+            // Stock Movement Add
+            if ($new_stock < $last_stock) {
+                $quantity = $last_stock - $new_stock;
+                ProductMovement::addMovement($product_id, (float) ($quantity * -1), NULL, __('Adjustment'), $request->product_name);
+            }
+
+            // Stock Movement Remove
+            if ($new_stock > $last_stock) {
+                $quantity = $new_stock - $last_stock;
+                ProductMovement::addMovement($product_id, (float) ($quantity), NULL, __('Adjustment'), $request->product_name);
+            }
 
             return redirect()->route('all.product')->with($notification);
         } // End else Condition  
@@ -146,4 +171,32 @@ class ProductController extends Controller
 
         return view('backend.product.barcode_product', compact('product', 'qty'));
     } // End Method
+
+    public function MovementProduct($id)
+    {
+        $start_date = Carbon::now()->startOfMonth()->toDateString();
+        $end_date = Carbon::now()->endOfMonth()->toDateString();
+
+        $product = Product::findOrFail($id);
+        $movements = ProductMovement::where('product_id', $product->id)
+            ->whereBetween('date', [$start_date, $end_date])
+            ->orderBy('id', 'asc')->get();
+
+        return view('backend.product.movement_product', compact('product', 'start_date', 'end_date', 'movements'));
+    } // End Method 
+
+    public function FilterMovementProduct(Request $request)
+    {
+        $start_date = $request->start_date ?? Carbon::now()->startOfMonth()->toDateString();
+        $end_date = $request->end_date ?? Carbon::now()->endOfMonth()->toDateString();
+
+        $id = $request->product_id;
+
+        $product = Product::findOrFail($id);
+        $movements = ProductMovement::where('product_id', $product->id)
+            ->whereBetween('date', [$start_date, $end_date])
+            ->orderBy('id', 'asc')->get();
+
+        return view('backend.product.movement_product', compact('product', 'start_date', 'end_date', 'movements'));
+    } // End Method 
 }

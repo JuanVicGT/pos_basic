@@ -153,8 +153,6 @@
                         <div class="mb-3">
                             <label for="username" class="form-label">{{ __('Payment') }}</label>
                             <select name="payment_status" class="form-select" id="payment-type">
-                                <option selected disabled>{{ __('Select Payment') }}</option>
-
                                 <option value="HandCash">{{ __('handcash') }}</option>
                                 <option value="Card">{{ __('card') }}</option>
                                 <option value="Cheque">{{ __('cheque') }}</option>
@@ -166,7 +164,7 @@
                         <div class="mb-3">
                             <label for="username" class="form-label">{{ __('amount') }}</label>
                             <input class="form-control" type="number" step="any" name="pay" id="pay"
-                                placeholder="{{ __('amount') }}">
+                                placeholder="{{ __('amount') }}" autofocus>
                         </div>
 
                         {{-- Only for HandCash --}}

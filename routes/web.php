@@ -141,6 +141,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/product', 'UdateProduct')->name('product.update');
         Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
         Route::post('/barcode/product', 'BarcodeProduct')->name('barcode.product');
+
+        Route::get('/kardex/product/{id}', 'MovementProduct')->name('product.movement');
+        Route::post('/filter_kardex/product', 'FilterMovementProduct')->name('product.movement.search');
     });
 
     /// Gastos rutas

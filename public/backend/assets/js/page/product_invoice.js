@@ -6,6 +6,9 @@ const calcPayback = (amount) => {
     let payback = document.getElementById("payback");
     let total = document.getElementById("total").value;
 
+    total = total.replace(/,/g, '');
+
+
     amount = parseFloat(amount);
     total = parseFloat(total);
 
@@ -32,6 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Hide payback group by default
     document.getElementById("payback-group").style.display = "none";
 
+    // Show payback group if payment type is HandCash
+    if (paymentType.value === "HandCash") {
+        document.getElementById("payback-group").style.display = "block";
+    }
+
+    // Show payback group if payment type is HandCash
     paymentType.addEventListener("change", function () {
         if (paymentType.value === "HandCash") {
             document.getElementById("payback-group").style.display = "block";
@@ -41,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     payment.addEventListener("input", function () {
-        console.log(payment.value);
         calcPayback(payment.value);
     });
 });

@@ -242,5 +242,12 @@
     "Incomes": "Ingresos",
     "Purchases": "Compras",
     "Sales": "Ventas",
-    "General Balance": "Balance General"
+    "General Balance": "Balance General",
+    "Product Movements :product_name": "Movimientos del producto: :product_name",
+    "Sale Order": "Venta",
+    "Purchase Order": "Compra",
+    "Origin": "Origen",
+    "Quantity": "Cantidad",
+    "Adjustment": "Ajuste",
+    "Creation": "Creación"
 }

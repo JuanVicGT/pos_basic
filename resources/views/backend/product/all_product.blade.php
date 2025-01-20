@@ -67,6 +67,8 @@
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#barcode-modal" data-target-id="{{ $item->id }}"
                                                     class="btn btn-info rounded-pill waves-effect waves-light">Codigo</button>
+                                                <a href="{{ route('product.movement', $item->id) }}"
+                                                    class="btn btn-warning rounded-pill waves-effect waves-light">Movimientos</a>
                                                 <a href="{{ route('delete.product', $item->id) }}"
                                                     class="btn btn-danger rounded-pill waves-effect waves-light"
                                                     id="delete">Eliminar</a </td>
