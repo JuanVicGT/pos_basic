@@ -81,15 +81,14 @@
                                 <th>{{ __('Date') }}</th>
                                 <th>{{ __('Customer') }} / {{ __('Supplier') }}</th>
                                 <th>{{ __('Amount') }}</th>
-                                <th>{{ __('Balance') }}</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach ($cashMovements as $movement)
                                 @php
-                                    $total += $movement->final_amount;
-                                    $balanceGeneral += $movement->balance;
+                                    $balanceGeneral += $movement->final_amount;
+
                                     if ($movement->doc_type == 'purchase') {
                                         $purchaseAmount += $movement->amount;
                                     }
@@ -112,27 +111,19 @@
                                     <td>{{ $movement->getCustomerOrSupplier() }}</td>
 
                                     @if ($movement->doc_type == 'purchase')
-                                        <td class="text-danger">Q {{ number_format($movement->amount, 4) }}</td>
+                                        <td class="text-danger text-end">Q {{ number_format($movement->amount, 2) }}</td>
                                     @endif
 
                                     @if ($movement->doc_type == 'sale')
-                                        <td class="text-success">Q {{ number_format($movement->amount, 4) }}</td>
+                                        <td class="text-success text-end">Q {{ number_format($movement->amount, 2) }}</td>
                                     @endif
 
                                     @if ($movement->doc_type == 'expense')
-                                        <td class="text-danger">Q {{ number_format($movement->amount, 4) }}</td>
+                                        <td class="text-danger text-end">Q {{ number_format($movement->amount, 2) }}</td>
                                     @endif
 
                                     @if ($movement->doc_type == 'income')
-                                        <td class="text-success">Q {{ number_format($movement->amount, 4) }}</td>
-                                    @endif
-
-                                    @if ($movement->balance > 0)
-                                        <td class="text-success">Q {{ number_format($movement->balance, 4) }}</td>
-                                    @elseif ($movement->balance == 0)
-                                        <td class="text-warning">Q {{ number_format($movement->balance, 4) }}</td>
-                                    @else
-                                        <td class="text-danger">Q {{ number_format($movement->balance, 4) }}</td>
+                                        <td class="text-success text-end">Q {{ number_format($movement->amount, 2) }}</td>
                                     @endif
                                 </tr>
                             @endforeach
@@ -140,9 +131,6 @@
                         </tbody>
                     </table>
 
-                    @php
-                        $total = $saleAmount - $purchaseAmount;
-                    @endphp
                     <hr>
 
                     <div class="row text-center">
@@ -159,14 +147,14 @@
 
                             <tbody>
                                 <tr>
-                                    <td class="">Q {{ number_format($expenseAmount, 4) }}</td>
-                                    <td class="">Q {{ number_format($incomeAmount, 4) }}</td>
-                                    <td class="">Q {{ number_format($purchaseAmount, 4) }}</td>
-                                    <td class="">Q {{ number_format($saleAmount, 4) }}</td>
+                                    <td class="">Q {{ number_format($expenseAmount, 2) }}</td>
+                                    <td class="">Q {{ number_format($incomeAmount, 2) }}</td>
+                                    <td class="">Q {{ number_format($purchaseAmount, 2) }}</td>
+                                    <td class="">Q {{ number_format($saleAmount, 2) }}</td>
                                     @if ($total > 0)
-                                        <td class="text-success">Q {{ number_format($total, 4) }}</td>
+                                        <td class="text-success">Q {{ number_format($balanceGeneral, 2) }}</td>
                                     @else
-                                        <td class="text-danger">Q {{ number_format($total, 4) }}</td>
+                                        <td class="text-danger">Q {{ number_format($balanceGeneral, 2) }}</td>
                                     @endif
                                 </tr>
                             </tbody>

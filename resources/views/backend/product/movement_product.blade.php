@@ -78,7 +78,7 @@
                                 <th>{{ __('Origin') }}</th>
                                 <th>{{ __('Date') }}</th>
                                 <th>{{ __('Quantity') }}</th>
-                                <th>{{ __('Balance') }}</th>
+                                <th>{{ __('Stock in moment') }}</th>
                             </tr>
                         </thead>
 
